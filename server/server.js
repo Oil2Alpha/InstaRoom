@@ -2,19 +2,23 @@
 
 const Koa = require('koa');
 const Router = require('koa-router');
-const {koaBody} = require('koa-body');
-const routes = require('./routes'); 
+const { koaBody } = require('koa-body');
+const routes = require('./routes');
 const serve = require('koa-static');
 const cors = require('@koa/cors'); // 导入 CORS
-const path = require('path'); 
-// 引入 undici 库
-const { setGlobalDispatcher, ProxyAgent } = require('undici');
+const path = require('path');
 require('dotenv').config(); // 确保加载环境变量
 
-// === 代理配置：必须在 Koa 启动之前设置 ===
-const PROXY_URL = 'http://127.0.0.1:10794'; 
+// === 代理配置说明 ===
+// 如果使用 Clash TUN 模式（虚拟网卡），无需配置代理，流量会自动通过虚拟网卡
+// 如果使用 HTTP 代理模式，取消下面的注释并配置正确的代理地址
+/*
+const { setGlobalDispatcher, ProxyAgent } = require('undici');
+const PROXY_URL = process.env.PROXY_URL || 'http://127.0.0.1:7897'; 
 const proxyAgent = new ProxyAgent(PROXY_URL);
 setGlobalDispatcher(proxyAgent);
+console.log(`Using HTTP proxy: ${PROXY_URL}`);
+*/
 // ==========================================
 
 const app = new Koa();

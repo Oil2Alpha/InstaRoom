@@ -1,0 +1,51 @@
+/* src/styles/global.css */
+/* 如果您使用 Tailwind CSS，这里是它的指令 */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 引入中文字体和英文字体堆栈 */
+/* 确保您已在 index.html 中引入了 Google Fonts 链接 */
+:root {
+  /* 衬线体用于标题 */
+  --font-serif: 'Cormorant Garamond', serif;
+  /* 无衬线体用于正文 */
+  --font-sans: 'Inter', system-ui, sans-serif; 
+}
+
+body {
+    font-family: var(--font-sans);
+    color: #333333; /* 品牌深灰色 */
+}
+
+h1, h2, h3 {
+    font-family: var(--font-serif);
+}
+
+/* 加载动画 */
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-shimmer {
+    animation: shimmer 2s infinite;
+}
+
+.animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+}
