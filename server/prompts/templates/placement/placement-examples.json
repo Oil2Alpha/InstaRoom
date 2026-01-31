@@ -1,0 +1,71 @@
+{
+    "examples": [
+        {
+            "id": "placement_sofa_modern",
+            "category": "沙发",
+            "input": {
+                "furniture_name": "沙发",
+                "room_style": "现代简约",
+                "dimensions": "200×90×80cm"
+            },
+            "output": {
+                "options": [
+                    {
+                        "id": 1,
+                        "name": "现代简约升级",
+                        "description": "保持简约风格，选用米色布艺沙发，线条更流畅，提升整体质感",
+                        "imagePrompt": "在这张房间照片中，保持墙面、地板和其他所有家具完全不变。第一步：移除并完全消除中央位置的旧沙发，使该区域恢复为干净的地板和墙面。第二步：在原沙发的位置精确放置一款现代简约风格的米色布艺沙发（200×90×80cm），采用针织面料和原木腿，线条流畅简洁，确保光照和阴影与房间环境一致。",
+                        "furnitureList": [
+                            {
+                                "name": "沙发",
+                                "estimatedDimensions": {
+                                    "length": 200,
+                                    "width": 90,
+                                    "height": 80
+                                },
+                                "styleKeywords": [
+                                    "现代",
+                                    "米色",
+                                    "布艺",
+                                    "简约"
+                                ],
+                                "materialTags": [
+                                    "针织面料",
+                                    "原木"
+                                ],
+                                "position": "客厅中央"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 2,
+                        "name": "轻奢风格转变",
+                        "description": "大胆尝试轻奢风格，灰色真皮沙发搭配金属腿，提升空间档次感",
+                        "imagePrompt": "在这张房间照片中，保持墙面、地板和其他所有家具完全不变。第一步：移除并完全消除中央位置的旧沙发，使该区域恢复为干净的地板和墙面。第二步：在原沙发的位置精确放置一款轻奢风格的灰色真皮沙发（205×92×82cm），采用真皮面料和金属腿，线条优雅，确保光照和阴影与房间环境一致。",
+                        "furnitureList": [
+                            {
+                                "name": "沙发",
+                                "estimatedDimensions": {
+                                    "length": 205,
+                                    "width": 92,
+                                    "height": 82
+                                },
+                                "styleKeywords": [
+                                    "轻奢",
+                                    "灰色",
+                                    "真皮",
+                                    "金属"
+                                ],
+                                "materialTags": [
+                                    "真皮",
+                                    "金属"
+                                ],
+                                "position": "客厅中央"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

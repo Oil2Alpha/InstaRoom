@@ -1,0 +1,70 @@
+{
+  "examples": [
+    {
+      "id": "room_analysis_living_room_modern",
+      "category": "客厅",
+      "input": {
+        "room_type_hint": "客厅",
+        "description": "现代简约风格客厅，木地板，白墙，大窗户"
+      },
+      "reasoning": "根据沙发、茶几的比例判断面积约 20-25㎡，根据门窗比例推测层高 2.8-3.0m，整体风格简洁明亮",
+      "output": {
+        "room_type": "客厅",
+        "area_range": "20-25",
+        "ceiling_height": "2.8-3.0",
+        "space_feeling": "宽敞",
+        "natural_light": "充足",
+        "existing_furniture": "部分家具",
+        "floor_type": "木地板",
+        "floor_color": "#D2B48C",
+        "wall_color": "#FFFFFF",
+        "overall_condition": "新房",
+        "style_hints": "现代简约"
+      }
+    },
+    {
+      "id": "room_analysis_bedroom_cozy",
+      "category": "卧室",
+      "input": {
+        "room_type_hint": "卧室",
+        "description": "温馨卧室，有床和衣柜，采光一般"
+      },
+      "reasoning": "根据床的尺寸（1.8m）和空间比例判断面积 15-18㎡，层高标准 2.6-2.8m",
+      "output": {
+        "room_type": "卧室",
+        "area_range": "15-18",
+        "ceiling_height": "2.6-2.8",
+        "space_feeling": "适中",
+        "natural_light": "一般",
+        "existing_furniture": "已有家具",
+        "floor_type": "木地板",
+        "floor_color": "#C19A6B",
+        "wall_color": "#F5F5DC",
+        "overall_condition": "新房",
+        "style_hints": "北欧"
+      }
+    },
+    {
+      "id": "room_analysis_study_empty",
+      "category": "书房",
+      "input": {
+        "room_type_hint": "书房",
+        "description": "空房间，硬装完成，准备布置书房"
+      },
+      "reasoning": "空间较小但采光好，适合作为书房，面积约 10-12㎡",
+      "output": {
+        "room_type": "书房",
+        "area_range": "10-12",
+        "ceiling_height": "2.6-2.8",
+        "space_feeling": "紧凑",
+        "natural_light": "充足",
+        "existing_furniture": "空房",
+        "floor_type": "复合地板",
+        "floor_color": "#DEB887",
+        "wall_color": "#FFFFFF",
+        "overall_condition": "新房",
+        "style_hints": "现代简约"
+      }
+    }
+  ]
+}

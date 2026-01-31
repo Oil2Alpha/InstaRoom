@@ -1,0 +1,89 @@
+{
+    "examples": [
+        {
+            "id": "scoring_modern_living_room",
+            "category": "现代简约客厅",
+            "input": {
+                "room_type": "客厅",
+                "style": "现代简约",
+                "lighting": "充足",
+                "furniture": "沙发、茶几、电视柜"
+            },
+            "output": {
+                "narrative_opening": "阳光透过落地窗洒在浅色木地板上，勾勒出一个宁静的角落。简洁的线条和克制的色彩，让人感受到一种都市中难得的从容。",
+                "total_score": 82,
+                "scores": {
+                    "Functional_Score": 85,
+                    "Aesthetics_Score": 88,
+                    "Lighting_Score": 90,
+                    "Overall_Design_Score": 75
+                },
+                "inherent_style": "Minimalist/Scandinavian",
+                "summary_text": "空间布局合理，采光充足，整体风格统一，建议增加软装提升温馨感。",
+                "improvement_suggestions": [
+                    "考虑在沙发旁增加一盏落地灯，提升夜间氛围照明",
+                    "添加 1-2 件装饰画或绿植，丰富视觉层次",
+                    "可以用抱枕或地毯增加色彩点缀"
+                ],
+                "key_suggestion_category": "Decoration"
+            }
+        },
+        {
+            "id": "scoring_cozy_bedroom",
+            "category": "温馨卧室",
+            "input": {
+                "room_type": "卧室",
+                "style": "温馨居家",
+                "lighting": "一般",
+                "furniture": "床、衣柜、床头柜"
+            },
+            "output": {
+                "narrative_opening": "这里有生活的温度——墙上的照片、桌上的绿植、随意搭在椅背上的外套。虽然略显拥挤，但每一件物品都在诉说着家的故事。",
+                "total_score": 73,
+                "scores": {
+                    "Functional_Score": 78,
+                    "Aesthetics_Score": 70,
+                    "Lighting_Score": 65,
+                    "Overall_Design_Score": 78
+                },
+                "inherent_style": "Cozy/Contemporary",
+                "summary_text": "空间温馨有生活气息，但照明略显不足，建议优化光源配置。",
+                "improvement_suggestions": [
+                    "增加床头阅读灯，提升功能性照明",
+                    "适当整理杂物，让空间更整洁",
+                    "可以考虑更换暖色调的窗帘，增强温馨感"
+                ],
+                "key_suggestion_category": "Lighting"
+            }
+        },
+        {
+            "id": "scoring_industrial_studio",
+            "category": "工业风工作室",
+            "input": {
+                "room_type": "工作室",
+                "style": "工业风",
+                "lighting": "较暗",
+                "furniture": "办公桌、椅子、书架"
+            },
+            "output": {
+                "narrative_opening": "裸露的砖墙与金属灯具碰撞出一种粗粝的美感。光影在混凝土地面上游走，这是一个属于创作者的自由空间。",
+                "total_score": 68,
+                "scores": {
+                    "Functional_Score": 72,
+                    "Aesthetics_Score": 75,
+                    "Lighting_Score": 55,
+                    "Overall_Design_Score": 70
+                },
+                "inherent_style": "Industrial/Loft",
+                "summary_text": "工业风格鲜明，但照明不足影响工作效率，建议增加功能性光源。",
+                "improvement_suggestions": [
+                    "增加一盏护眼台灯，改善工作区照明",
+                    "考虑添加轨道射灯，增强整体亮度",
+                    "可以用绿植软化工业风的硬朗感",
+                    "优化线路收纳，让空间更整洁"
+                ],
+                "key_suggestion_category": "Lighting"
+            }
+        }
+    ]
+}

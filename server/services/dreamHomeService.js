@@ -16,7 +16,7 @@ async function generateDreamHome(photo, scoreData) {
         console.log('优化建议数量:', scoreData.suggestions?.length || 0);
 
         // 步骤1：分析优化点并生成改造描述
-        const improvementPrompt = generateImprovementPrompt(scoreData);
+        const improvementPrompt = await generateImprovementPrompt(scoreData);
         console.log('改造描述生成完成');
 
         // 步骤2：生成购物清单
@@ -39,53 +39,22 @@ async function generateDreamHome(photo, scoreData) {
 }
 
 /**
- * 生成改造描述 prompt
+ * 生成改造描述 prompt（使用新 Prompt 系统）
  */
-function generateImprovementPrompt(scoreData) {
-    const { score, suggestions, narrative } = scoreData;
+async function generateImprovementPrompt(scoreData) {
+    const { DreamHomeBuilder } = require('../prompts');
 
-    // 提取优化建议（支持字符串数组和对象数组）
-    let suggestionTexts = '无具体建议';
-    if (suggestions && suggestions.length > 0) {
-        suggestionTexts = suggestions.map(s => {
-            // 如果是字符串，直接使用；如果是对象，取 suggestion 字段
-            return typeof s === 'string' ? s : (s.suggestion || s);
-        }).join('\n- ');
-    }
+    const builder = DreamHomeBuilder.createImprovementBuilder();
+    const prompt = await builder
+        .setScoreData(scoreData)
+        .build();
 
-    const prompt = `
-请在这张房间照片的基础上，进行以下改造优化：
-
-【当前评分】${score}/100
-
-【优化建议】
-- ${suggestionTexts}
-
-【改造要求】
-1. **保持原有布局**：不改变房间的整体结构、墙面、地板、窗户位置
-2. **根据建议改造**：
-   - 如果建议"增加绿植" → 在合适位置添加 1-2 盆绿植（如龟背竹、琴叶榕）
-   - 如果建议"改善照明" → 增加落地灯、台灯或调整光线
-   - 如果建议"优化收纳" → 添加收纳柜、置物架
-   - 如果建议"增加装饰" → 添加挂画、抱枕、地毯等装饰品
-   - 如果建议"调整色彩" → 通过软装调整色彩搭配
-3. **提升美观度**：整体更加整洁、温馨、有设计感
-4. **保持真实感**：改造后的效果要自然、可实现，不要过于夸张
-5. **适当消除杂物**：让空间更整洁，但保持生活气息
-
-【风格要求】
-- 现代简约、温馨舒适
-- 光线明亮、通透
-- 色彩和谐、有层次感
-
-请生成改造后的房间效果图。
-`;
-
+    console.log('使用新 Prompt 系统生成改造指令');
     return prompt;
 }
 
 /**
- * 生成购物清单
+ * 生成购物清单（使用新 Prompt 系统）
  */
 async function generateShoppingList(scoreData) {
     try {
@@ -95,50 +64,15 @@ async function generateShoppingList(scoreData) {
             return [];
         }
 
-        // 格式化建议（支持字符串和对象）
-        const formattedSuggestions = suggestions.map((s, i) => {
-            const text = typeof s === 'string' ? s : (s.suggestion || s);
-            return `${i + 1}. ${text}`;
-        }).join('\n');
+        const { DreamHomeBuilder } = require('../prompts');
 
-        const prompt = `
-你是一位专业的家居设计师。根据以下房间优化建议，生成一份购物清单。
+        const builder = DreamHomeBuilder.createShoppingListBuilder();
+        const prompt = await builder
+            .setSuggestions(suggestions)
+            .addRelevantExamples(suggestions, 2)
+            .build();
 
-【优化建议】
-${formattedSuggestions}
-
-请为每条建议推荐 1-2 个具体商品，生成 JSON 格式的购物清单。
-
-【输出格式】
-\`\`\`json
-{
-  "items": [
-    {
-      "category": "商品类别（如：绿植、灯具、收纳、装饰品）",
-      "name": "具体商品名称",
-      "tags": ["标签1", "标签2", "标签3"],
-      "reason": "推荐理由（简短，20字以内）",
-      "estimatedPrice": "价格区间（如：50-100）"
-    }
-  ]
-}
-\`\`\`
-
-【标签示例】
-- 绿植：小型、中型、大型、净化空气、耐阴、好养护
-- 灯具：暖光、冷光、可调光、护眼、节能
-- 收纳：多层、可移动、简约、大容量
-- 装饰品：北欧风、现代简约、温馨、艺术感
-
-【要求】
-1. 商品要具体、实用、易购买
-2. 价格合理，符合大众消费水平
-3. 标签要准确、有用
-4. 推荐理由要简洁明了
-5. 总共推荐 3-6 个商品
-
-请直接输出 JSON，不要有其他文字。
-`;
+        console.log('使用新 Prompt 系统生成购物清单 Prompt');
 
         const response = await ai.models.generateContent({
             model: 'gemini-3-flash-preview',

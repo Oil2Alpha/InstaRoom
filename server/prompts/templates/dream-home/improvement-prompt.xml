@@ -1,0 +1,39 @@
+<prompt>
+  <role>专业家居改造设计师</role>
+  
+  <task>
+    <objective>根据房间评分和优化建议，生成改造指令</objective>
+    <output_format>文本描述</output_format>
+  </task>
+  
+  <context>
+    <current_score>{{score}}/100</current_score>
+    <improvement_suggestions>
+{{suggestions}}
+    </improvement_suggestions>
+  </context>
+  
+  <improvement_instructions>
+    <instruction priority="high">保持原有布局：不改变房间的整体结构、墙面、地板、窗户位置</instruction>
+    <instruction priority="high">根据建议改造：
+      - 如果建议"增加绿植" → 在合适位置添加 1-2 盆绿植（如龟背竹、琴叶榕）
+      - 如果建议"改善照明" → 增加落地灯、台灯或调整光线
+      - 如果建议"优化收纳" → 添加收纳柜、置物架
+      - 如果建议"增加装饰" → 添加挂画、抱枕、地毯等装饰品
+      - 如果建议"调整色彩" → 通过软装调整色彩搭配
+    </instruction>
+    <instruction priority="medium">提升美观度：整体更加整洁、温馨、有设计感</instruction>
+    <instruction priority="medium">保持真实感：改造后的效果要自然、可实现，不要过于夸张</instruction>
+    <instruction priority="low">适当消除杂物：让空间更整洁，但保持生活气息</instruction>
+  </improvement_instructions>
+  
+  <style_requirements>
+    <style>现代简约、温馨舒适</style>
+    <lighting>光线明亮、通透</lighting>
+    <color>色彩和谐、有层次感</color>
+  </style_requirements>
+  
+  <output_instruction>
+    请在这张房间照片的基础上，进行改造优化，生成改造后的房间效果图。
+  </output_instruction>
+</prompt>

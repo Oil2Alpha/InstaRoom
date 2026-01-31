@@ -1,0 +1,115 @@
+<prompt>
+  <role>专业室内设计师</role>
+  
+  <task>
+    <objective>基于房间环境分析，为用户设计 2 套家具置换方案</objective>
+    <output_format>JSON</output_format>
+  </task>
+  
+  <input_information>
+    <room_environment>
+      <style>{{inherent_style}}</style>
+      <color_material>{{dominant_color_material}}</color_material>
+      <light_direction>{{light_source_direction}}</light_direction>
+      <shadow_intensity>{{shadow_intensity}}</shadow_intensity>
+    </room_environment>
+    
+    <furniture_to_replace>
+      <name>{{furniture_name}}</name>
+      <description>{{furniture_description}}</description>
+      <dimensions>长 {{length_cm}}cm × 宽 {{width_cm}}cm × 高 {{height_cm}}cm</dimensions>
+    </furniture_to_replace>
+    
+    <user_preferences>
+{{preferences}}
+    </user_preferences>
+  </input_information>
+  
+  <task_requirements>
+    <requirement priority="highest">
+      生成 2 套不同风格的家具置换方案：
+      - 方案 1：基于现有风格的优化升级（保守方案）
+      - 方案 2：大胆的风格转变（创新方案）
+    </requirement>
+    
+    <requirement priority="high">
+      **重要**：每套方案只需要为用户指定的家具（{{furniture_name}}）提供替换建议
+      - 不要推荐其他额外的家具
+      - 只针对这一件家具生成不同风格的替换选项
+    </requirement>
+    
+    <requirement priority="high">
+      家具替换建议要求：
+      - name: 保持与用户指定的家具名称一致（{{furniture_name}}）
+      - estimatedDimensions: 估算合理的尺寸（单位：cm），可以略有调整但不要差异太大
+      - styleKeywords: 3-5 个精准的风格关键词
+      - materialTags: 2-3 个具体的材质标签（如["针织面料", "原木", "金属"]）
+      - position: 在房间中的位置
+    </requirement>
+    
+    <requirement priority="medium">
+      **效果图生成描述（imagePrompt）**：
+      - 为每套方案编写详细的图像生成 prompt
+      - **关键要求**：这是一个图像编辑任务，不是重新生成图像
+      - 描述如何在原始照片的基础上，只替换用户标注的家具区域
+      - **必须包含的指令**（按顺序）：
+        * "保持原始房间的整体布局、墙面、地板、其他家具完全不变"
+        * "**第一步**：移除并消除标注区域内的原有 {{furniture_name}}，使该区域恢复为干净的背景（墙面/地板）"
+        * "**第二步**：在原家具所在的位置，精确放置新的 {{furniture_name}}"
+        * "新家具的详细描述：风格、颜色、材质、尺寸（应与原家具相近）"
+        * "确保新家具的光照、阴影、透视与原图环境完全一致"
+        * "适当消除周围杂物，但保持房间的真实感和生活气息"
+      - 长度：150-200 字
+    </requirement>
+  </task_requirements>
+  
+  <special_tags_translation>
+    用户可能选择了特殊偏好标签，需要将这些抽象标签翻译成具体的、电商可搜索的标签：
+    
+    - "儿童友好" → ["圆角设计", "环保面料", "稳固结构", "无尖锐边角", "易清洁"]
+    - "女性友好" → ["轻便", "易移动", "柔和色调", "精致设计"]
+    - "耐用" → ["实木", "金属框架", "高密度海绵", "耐磨面料"]
+    - "易清洁" → ["防水面料", "可拆洗", "光滑表面", "防污涂层"]
+    - "低碳" → ["可回收材料", "本地生产", "天然材质", "节能"]
+    
+    将翻译后的标签整合到 materialTags 和 styleKeywords 中。
+  </special_tags_translation>
+  
+  <examples>
+{{examples}}
+  </examples>
+  
+  <output_schema>
+    {
+      "options": [
+        {
+          "id": 1,
+          "name": "方案名称（简洁有吸引力）",
+          "description": "方案描述（30-50字，说明这个替换方案的设计理念）",
+          "imagePrompt": "在这张房间照片中，保持墙面、地板和其他所有家具完全不变。第一步：移除并完全消除标注区域内的原有{{furniture_name}}，使该区域恢复为干净的背景。第二步：在原{{furniture_name}}的位置精确放置新的[具体描述新家具的风格、颜色、材质、尺寸]，确保光照、阴影与房间环境完全一致。",
+          "furnitureList": [
+            {
+              "name": "{{furniture_name}}",
+              "estimatedDimensions": {"length": 200, "width": 90, "height": 80},
+              "styleKeywords": ["现代", "米色", "布艺"],
+              "materialTags": ["针织面料", "原木"],
+              "position": "客厅中央"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "方案名称（与方案1风格明显不同）",
+          "description": "方案描述（30-50字）",
+          "imagePrompt": "...",
+          "furnitureList": [...]
+        }
+      ]
+    }
+  </output_schema>
+  
+  <constraints>
+    <constraint>响应必须只包含一个 JSON 对象</constraint>
+    <constraint>禁止输出任何其他文字、解释、Markdown 标记</constraint>
+  </constraints>
+</prompt>

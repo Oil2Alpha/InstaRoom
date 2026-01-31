@@ -1,0 +1,112 @@
+{
+    "examples": [
+        {
+            "id": "shopping_list_greenery",
+            "category": "增加绿植",
+            "input": {
+                "suggestions": [
+                    "增加绿植，提升空间生机感",
+                    "改善空气质量"
+                ]
+            },
+            "output": {
+                "items": [
+                    {
+                        "category": "绿植",
+                        "name": "龟背竹（中型）",
+                        "tags": [
+                            "净化空气",
+                            "耐阴",
+                            "好养护"
+                        ],
+                        "reason": "净化空气，提升空间生机感",
+                        "estimatedPrice": "80-150"
+                    },
+                    {
+                        "category": "绿植",
+                        "name": "琴叶榕（小型）",
+                        "tags": [
+                            "装饰性强",
+                            "北欧风",
+                            "好养护"
+                        ],
+                        "reason": "叶片大气，适合现代简约风格",
+                        "estimatedPrice": "50-100"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "shopping_list_lighting",
+            "category": "改善照明",
+            "input": {
+                "suggestions": [
+                    "增加辅助照明，提升氛围感",
+                    "改善阅读区照明"
+                ]
+            },
+            "output": {
+                "items": [
+                    {
+                        "category": "灯具",
+                        "name": "北欧风落地灯",
+                        "tags": [
+                            "暖光",
+                            "可调光",
+                            "护眼"
+                        ],
+                        "reason": "提升氛围感，适合阅读",
+                        "estimatedPrice": "200-400"
+                    },
+                    {
+                        "category": "灯具",
+                        "name": "LED护眼台灯",
+                        "tags": [
+                            "护眼",
+                            "可调光",
+                            "节能"
+                        ],
+                        "reason": "适合工作学习，保护视力",
+                        "estimatedPrice": "150-300"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "shopping_list_decoration",
+            "category": "增加装饰",
+            "input": {
+                "suggestions": [
+                    "增加墙面装饰，丰富视觉层次",
+                    "添加软装提升温馨感"
+                ]
+            },
+            "output": {
+                "items": [
+                    {
+                        "category": "装饰品",
+                        "name": "抽象艺术挂画",
+                        "tags": [
+                            "现代简约",
+                            "艺术感",
+                            "百搭"
+                        ],
+                        "reason": "丰富墙面，提升艺术感",
+                        "estimatedPrice": "100-200"
+                    },
+                    {
+                        "category": "装饰品",
+                        "name": "北欧风抱枕套（2个）",
+                        "tags": [
+                            "温馨",
+                            "舒适",
+                            "可拆洗"
+                        ],
+                        "reason": "增加色彩点缀，提升舒适度",
+                        "estimatedPrice": "50-100"
+                    }
+                ]
+            }
+        }
+    ]
+}

@@ -50,39 +50,23 @@ async function generateCustomizationPlan(photo, userRequirements) {
 }
 
 /**
- * 分析房间
+ * 分析房间（使用新的 Prompt 工程系统）
  */
 async function analyzeRoom(photo, roomPurposeHint) {
     try {
         const { fileToGenerativePart } = require('./aiService');
+        const { RoomCustomizationBuilder } = require('../prompts');
+
         const imagePart = fileToGenerativePart(photo.filepath, photo.mimetype);
 
-        const prompt = `
-分析这张房间照片，提供以下信息（JSON格式）：
+        // 使用 Prompt Builder 构建结构化 Prompt
+        const builder = new RoomCustomizationBuilder();
+        const prompt = await builder
+            .setRoomTypeHint(roomPurposeHint)
+            .addRelevantExamples(roomPurposeHint, 2)
+            .build();
 
-{
-  "room_type": "客厅/卧室/书房/厨房/餐厅",
-  "area_range": "15-20",
-  "ceiling_height": "2.6-2.8",
-  "space_feeling": "宽敞/适中/紧凑",
-  "natural_light": "充足/一般/较暗",
-  "existing_furniture": "空房/部分家具/已有家具",
-  "floor_type": "木地板/瓷砖/地毯",
-  "floor_color": "#D2B48C",
-  "wall_color": "#FFFFFF",
-  "overall_condition": "新房/旧房翻新",
-  "style_hints": "现代简约/北欧/工业风/中式/混搭"
-}
-
-注意：
-1. 面积估算基于可见的空间大小和家具比例
-2. 层高根据门窗比例推测（标准门高2.1m）
-3. 用户提示这是：${roomPurposeHint}
-4. 如果不确定，给出合理范围
-5. 直接输出 JSON，不要有其他文字
-
-请分析：
-`;
+        console.log('使用新 Prompt 系统生成房间分析 Prompt');
 
         const response = await ai.models.generateContent({
             model: 'gemini-3-flash-preview',
