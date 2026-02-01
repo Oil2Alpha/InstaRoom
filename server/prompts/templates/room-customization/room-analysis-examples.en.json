@@ -1,0 +1,70 @@
+{
+    "examples": [
+        {
+            "id": "room_analysis_living_room_modern",
+            "category": "Living Room",
+            "input": {
+                "room_type_hint": "Living Room",
+                "description": "Modern minimalist living room with hardwood floors, white walls, large windows"
+            },
+            "reasoning": "Based on sofa and coffee table proportions, estimated area is 20-25㎡. Ceiling height 2.8-3.0m based on door/window ratios. Overall style is clean and bright.",
+            "output": {
+                "room_type": "Living Room",
+                "area_range": "20-25",
+                "ceiling_height": "2.8-3.0",
+                "space_feeling": "Spacious",
+                "natural_light": "Abundant",
+                "existing_furniture": "Partial",
+                "floor_type": "Hardwood",
+                "floor_color": "#D2B48C",
+                "wall_color": "#FFFFFF",
+                "overall_condition": "New",
+                "style_hints": "Modern Minimalist"
+            }
+        },
+        {
+            "id": "room_analysis_bedroom_cozy",
+            "category": "Bedroom",
+            "input": {
+                "room_type_hint": "Bedroom",
+                "description": "Cozy bedroom with bed and wardrobe, moderate natural light"
+            },
+            "reasoning": "Based on bed size (1.8m) and space proportions, estimated area is 15-18㎡. Standard ceiling height 2.6-2.8m.",
+            "output": {
+                "room_type": "Bedroom",
+                "area_range": "15-18",
+                "ceiling_height": "2.6-2.8",
+                "space_feeling": "Moderate",
+                "natural_light": "Normal",
+                "existing_furniture": "Furnished",
+                "floor_type": "Hardwood",
+                "floor_color": "#C19A6B",
+                "wall_color": "#F5F5DC",
+                "overall_condition": "New",
+                "style_hints": "Scandinavian"
+            }
+        },
+        {
+            "id": "room_analysis_study_empty",
+            "category": "Study",
+            "input": {
+                "room_type_hint": "Study",
+                "description": "Empty room with finished hard decoration, ready to set up as study"
+            },
+            "reasoning": "Smaller space but good lighting, suitable as a study. Estimated area 10-12㎡.",
+            "output": {
+                "room_type": "Study",
+                "area_range": "10-12",
+                "ceiling_height": "2.6-2.8",
+                "space_feeling": "Compact",
+                "natural_light": "Abundant",
+                "existing_furniture": "Empty",
+                "floor_type": "Laminate",
+                "floor_color": "#DEB887",
+                "wall_color": "#FFFFFF",
+                "overall_condition": "New",
+                "style_hints": "Modern Minimalist"
+            }
+        }
+    ]
+}

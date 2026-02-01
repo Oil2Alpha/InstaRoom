@@ -1,0 +1,138 @@
+{
+  "appName": "InstaRoom",
+  "loading": "Loading...",
+  "error": "Error",
+  "success": "Success",
+  "upload": "Upload Photo",
+  "analyze": "Analyze",
+  "generate": "Generate",
+  "back": "Back",
+  "backToHome": "Back to Home",
+  "next": "Next",
+  "submit": "Submit",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "retry": "Retry",
+  "share": "Share",
+  "download": "Download",
+  "save": "Save",
+  "edit": "Edit",
+  "delete": "Delete",
+  "close": "Close",
+  "selectPhoto": "Select Photo",
+  "uploadPhoto": "Upload Photo",
+  "dragDropPhoto": "Drag and drop your photo here, or click to select",
+  "photoRequired": "Photo is required",
+  "invalidFileType": "Invalid file type. Please upload an image.",
+  "fileTooLarge": "File is too large. Maximum size is 10MB.",
+  "processingImage": "Processing image...",
+  "generatingResults": "Generating results...",
+  "pleaseWait": "Please wait...",
+  "comingSoon": "Coming Soon",
+  "featureComingSoon": "This feature is coming soon!",
+  "networkError": "Network error, please try again later",
+  "unknownError": "Unknown error",
+  "defaultLoadingMessage": "AI is analyzing your space",
+  "loadingSteps": {
+    "placement": [
+      {
+        "icon": "📸",
+        "text": "Analyzing uploaded photos..."
+      },
+      {
+        "icon": "📏",
+        "text": "AI is measuring furniture with a tape..."
+      },
+      {
+        "icon": "🤔",
+        "text": "AI is estimating the sofa weight..."
+      },
+      {
+        "icon": "🏠",
+        "text": "AI is visiting the furniture store..."
+      },
+      {
+        "icon": "🎨",
+        "text": "Flipping through home magazines for inspiration..."
+      },
+      {
+        "icon": "☕",
+        "text": "AI is taking a coffee break..."
+      },
+      {
+        "icon": "💡",
+        "text": "Inspiration struck! Generating options..."
+      },
+      {
+        "icon": "🛋️",
+        "text": "AI is moving virtual furniture..."
+      },
+      {
+        "icon": "✨",
+        "text": "Adding magic effects to renderings..."
+      },
+      {
+        "icon": "🛍️",
+        "text": "Price comparing on e-commerce sites..."
+      },
+      {
+        "icon": "🎯",
+        "text": "Selecting the best furniture for you..."
+      },
+      {
+        "icon": "🎁",
+        "text": "Almost done, packaging the solution..."
+      }
+    ],
+    "scoring": [
+      {
+        "icon": "🔍",
+        "text": "Analyzing room lighting..."
+      },
+      {
+        "icon": "👀",
+        "text": "AI is carefully examining your room..."
+      },
+      {
+        "icon": "🎨",
+        "text": "Identifying space style..."
+      },
+      {
+        "icon": "🤓",
+        "text": "AI put on glasses, scoring seriously..."
+      },
+      {
+        "icon": "📐",
+        "text": "Evaluating furniture layout..."
+      },
+      {
+        "icon": "🧐",
+        "text": "AI is checking details meticulously..."
+      },
+      {
+        "icon": "💡",
+        "text": "Detecting lighting ambiance..."
+      },
+      {
+        "icon": "☕",
+        "text": "AI is taking a tea break..."
+      },
+      {
+        "icon": "✨",
+        "text": "Generating improvement suggestions..."
+      },
+      {
+        "icon": "📝",
+        "text": "AI is writing comments elegantly..."
+      },
+      {
+        "icon": "🎯",
+        "text": "Calculating overall score..."
+      },
+      {
+        "icon": "🎉",
+        "text": "About to reveal your room score..."
+      }
+    ]
+  }
+}

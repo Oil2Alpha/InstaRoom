@@ -1,0 +1,52 @@
+{
+    "title": "房间评分",
+    "uploadTitle": "读懂家的美学脉络",
+    "uploadDescription": "上传房间照片，AI 驱动的专业设计师将从功能、美学和光影角度给出深度分析。",
+    "analyzing": "正在分析你的房间...",
+    "focusArea": "关注点 (可选)",
+    "focusAreaPlaceholder": "例如：收纳空间，照明设计",
+    "uploadPhotoLabel": "拍摄/上传房间照片",
+    "photoSelected": "已选",
+    "photoHint": "仅支持 JPG, PNG，确保光线充足。",
+    "startAnalysis": "开始 AI 评分",
+    "networkError": "网络错误，请稍后重试",
+    "results": {
+        "title": "房间分析结果",
+        "totalScore": "总分",
+        "aiSmartScore": "AI 智能评分",
+        "narrative": "对您房间的第一印象",
+        "yourSpace": "您的空间",
+        "dimensions": {
+            "title": "详细评分分析",
+            "functional": "功能性",
+            "aesthetics": "美观度",
+            "lighting": "照明氛围",
+            "overall": "整体设计"
+        },
+        "style": "风格识别",
+        "summary": "总结",
+        "suggestions": {
+            "title": "专业改进建议",
+            "category": "重点关注"
+        },
+        "actions": {
+            "generateDreamHome": "✨ 一键生成梦中情家",
+            "generating": "生成中...",
+            "startPlacement": "开始家具置换 →",
+            "shareReport": "分享报告",
+            "sharing": "生成中..."
+        },
+        "loading": "加载评分结果中...",
+        "backToHome": "返回主页",
+        "dataLost": "未找到评分数据，请重新上传照片。",
+        "parseError": "数据解析错误，请重新上传照片。",
+        "dataError": "评分数据格式错误，请重试",
+        "storageError": "数据存储失败，请检查浏览器设置",
+        "missingData": "缺少必要数据，请重新评分",
+        "generationFailed": "生成失败：",
+        "shareGenerated": "✅ 评分报告已保存到您的设备！",
+        "shareGenerateFailed": "生成分享图片失败",
+        "shareImageFailed": "生成图片失败，请重试",
+        "dataTooLarge": "数据过大，正在尝试其他方式..."
+    }
+}

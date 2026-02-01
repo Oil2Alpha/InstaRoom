@@ -4,13 +4,17 @@ const BasePromptBuilder = require('./BasePromptBuilder');
 
 /**
  * 房间评分 Prompt 构建器
+ * 支持多语言（中文/英文）
  */
 class RoomScoringBuilder extends BasePromptBuilder {
-    constructor() {
-        super(
-            'room-scoring/scoring.xml',
-            'room-scoring/scoring-examples.json'
-        );
+    constructor(language = 'zh') {
+        // 根据语言选择对应的模板和示例文件
+        const lang = language === 'en' ? 'en' : 'zh';
+        const templatePath = `room-scoring/scoring.${lang}.xml`;
+        const examplesPath = `room-scoring/scoring-examples.${lang}.json`;
+
+        super(templatePath, examplesPath);
+        this.language = lang;
     }
 
     /**

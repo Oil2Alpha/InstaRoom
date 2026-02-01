@@ -53,10 +53,15 @@ async function generateCustomization(ctx) {
         console.log('风格偏好:', userRequirements.style_preferences);
         console.log('预算:', userRequirements.budget_range);
 
-        // 3. 调用服务生成定制方案
+        // 2.5 提取语言参数（默认英文，适合 Hackathon）
+        const language = ctx.request.body.language || 'en';
+        console.log('语言:', language);
+
+        // 3. 调用服务生成定制方案（传入语言参数）
         const result = await roomCustomizationService.generateCustomizationPlan(
             photo,
-            userRequirements
+            userRequirements,
+            language
         );
 
         console.log('=== 房间定制方案生成完成 ===');

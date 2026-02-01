@@ -1,7 +1,9 @@
 // src/components/DimensionConfirmModal.jsx
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const DimensionConfirmModal = ({ isOpen, dimensions, onConfirm, onCancel }) => {
+    const { t } = useTranslation('placement');
     const [editedDimensions, setEditedDimensions] = useState({
         length_cm: 0,
         width_cm: 0,
@@ -33,10 +35,10 @@ const DimensionConfirmModal = ({ isOpen, dimensions, onConfirm, onCancel }) => {
                         <span className="text-3xl">📏</span>
                     </div>
                     <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                        确认家具尺寸
+                        {t('dimensionModal.title')}
                     </h2>
                     <p className="text-sm text-gray-600">
-                        AI 已自动测量尺寸，您可以手动调整
+                        {t('dimensionModal.subtitle')}
                     </p>
                 </div>
 
@@ -44,7 +46,7 @@ const DimensionConfirmModal = ({ isOpen, dimensions, onConfirm, onCancel }) => {
                 <div className="space-y-4 mb-6">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                            长度 (cm)
+                            {t('dimensionModal.length')}
                         </label>
                         <input
                             type="number"
@@ -59,7 +61,7 @@ const DimensionConfirmModal = ({ isOpen, dimensions, onConfirm, onCancel }) => {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                            宽度 (cm)
+                            {t('dimensionModal.width')}
                         </label>
                         <input
                             type="number"
@@ -74,7 +76,7 @@ const DimensionConfirmModal = ({ isOpen, dimensions, onConfirm, onCancel }) => {
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                            高度 (cm)
+                            {t('dimensionModal.height')}
                         </label>
                         <input
                             type="number"
@@ -91,7 +93,7 @@ const DimensionConfirmModal = ({ isOpen, dimensions, onConfirm, onCancel }) => {
                 {/* 提示信息 */}
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-6">
                     <p className="text-xs text-blue-800">
-                        💡 提示：准确的尺寸有助于 AI 推荐更合适的家具
+                        {t('dimensionModal.tip')}
                     </p>
                 </div>
 
@@ -101,13 +103,13 @@ const DimensionConfirmModal = ({ isOpen, dimensions, onConfirm, onCancel }) => {
                         onClick={onCancel}
                         className="flex-1 px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium"
                     >
-                        取消
+                        {t('dimensionModal.cancel')}
                     </button>
                     <button
                         onClick={handleConfirm}
                         className="flex-1 px-6 py-3 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-lg hover:shadow-lg transition-all font-medium"
                     >
-                        确认继续
+                        {t('dimensionModal.confirm')}
                     </button>
                 </div>
             </div>

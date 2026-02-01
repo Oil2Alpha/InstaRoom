@@ -64,8 +64,13 @@ async function generateDreamHome(ctx) {
             suggestions: suggestions
         };
 
-        // 3. 调用服务生成梦中情家
-        const result = await dreamHomeService.generateDreamHome(photo, normalizedScoreData);
+        // 4. 提取语言参数
+        const language = ctx.request.body.language || 'en';
+        console.log('语言:', language);
+
+        // 5. 调用服务生成梦中情家（传入语言参数）
+        const result = await dreamHomeService.generateDreamHome(photo, normalizedScoreData, language);
+
 
         console.log('=== 梦中情家生成完成 ===');
 

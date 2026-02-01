@@ -58,12 +58,15 @@ async function generatePlacement(ctx) {
 
         // 5. 生成2套置换方案（调用 placementService）
         console.log('步骤 3/4: 生成置换方案...');
+        const language = inputData.language || 'en';
+        console.log('语言:', language);
         const placementOptions = await generatePlacementOptions({
             furnitureInfo: inputData.furnitureInfo,
             dimensions: calculatedDimensions,
             environment: environmentResult,
             preferences: inputData.preferences,
-            photo: mainPhoto  // 传递原始照片用于图像编辑
+            photo: mainPhoto,  // 传递原始照片用于图像编辑
+            language  // 传递语言参数
         });
         console.log(`生成了 ${placementOptions.options.length} 套方案`);
 

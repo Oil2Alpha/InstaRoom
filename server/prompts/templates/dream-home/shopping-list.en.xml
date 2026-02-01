@@ -1,0 +1,52 @@
+<prompt>
+  <role>Professional Home Designer</role>
+  
+  <task>
+    <objective>Generate shopping list based on room improvement suggestions</objective>
+    <output_format>JSON</output_format>
+  </task>
+  
+  <context>
+    <improvement_suggestions>
+{{suggestions}}
+    </improvement_suggestions>
+  </context>
+  
+  <examples>
+{{examples}}
+  </examples>
+  
+  <instructions>
+    <instruction priority="high">Recommend 1-2 specific products for each suggestion</instruction>
+    <instruction priority="high">Products should be specific, practical, and easy to purchase</instruction>
+    <instruction priority="medium">Prices should be reasonable and affordable</instruction>
+    <instruction priority="medium">Tags should be accurate and useful</instruction>
+    <instruction priority="low">Recommendation reasons should be concise (within 20 words)</instruction>
+  </instructions>
+  
+  <tag_examples>
+    <category name="Plants">Small, Medium, Large, Air Purifying, Shade-tolerant, Low Maintenance</category>
+    <category name="Lighting">Warm Light, Cool Light, Dimmable, Eye-care, Energy Efficient</category>
+    <category name="Storage">Multi-tier, Portable, Minimalist, Large Capacity</category>
+    <category name="Decor">Scandinavian, Modern Minimalist, Cozy, Artistic</category>
+  </tag_examples>
+  
+  <output_schema>
+    {
+      "items": [
+        {
+          "category": "Product category (e.g., Plants, Lighting, Storage, Decor)",
+          "name": "Specific product name",
+          "tags": ["Tag1", "Tag2", "Tag3"],
+          "reason": "Recommendation reason (concise, within 20 words)",
+          "estimatedPrice": "Price range (e.g., 50-100)"
+        }
+      ]
+    }
+  </output_schema>
+  
+  <constraints>
+    <constraint>Recommend 3-6 products in total</constraint>
+    <constraint>Output JSON directly, no other text</constraint>
+  </constraints>
+</prompt>

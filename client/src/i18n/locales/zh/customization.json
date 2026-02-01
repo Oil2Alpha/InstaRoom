@@ -1,0 +1,101 @@
+{
+    "title": "房间定制",
+    "subtitle": "告诉我们您的需求，AI 为您打造专属空间",
+    "input": {
+        "title": "🏠 房间风格定制",
+        "uploadPhoto": "📸 上传房间照片",
+        "uploadPhotoRequired": "必填",
+        "uploadHint": "点击上传硬装完成后的房间照片",
+        "roomInfo": {
+            "title": "🏡 房间用途",
+            "purpose": "房间用途",
+            "purposePlaceholder": "选择房间用途",
+            "occupants": "👥 居住人数",
+            "occupantsPlaceholder": "例如：2"
+        },
+        "preferences": {
+            "title": "🎨 风格偏好",
+            "style": "风格偏好",
+            "styleHint": "（最多选择3个）",
+            "stylePlaceholder": "选择风格（最多3个）",
+            "features": "⭐ 特殊需求",
+            "featuresPlaceholder": "选择需求",
+            "budget": "💰 预算范围",
+            "budgetPlaceholder": "选择预算",
+            "preferUsed": "♻️ 接受二手家具（更环保、更经济）"
+        },
+        "submit": "✨ 生成专属定制方案",
+        "submitting": "生成中..."
+    },
+    "roomPurposes": {
+        "living": "客厅",
+        "bedroom": "卧室",
+        "study": "书房",
+        "kids": "儿童房",
+        "dining": "餐厅",
+        "kitchen": "厨房"
+    },
+    "styles": {
+        "modern": "现代简约",
+        "nordic": "北欧风格",
+        "industrial": "工业风",
+        "chinese": "中式",
+        "japanese": "日式",
+        "american": "美式"
+    },
+    "specialNeeds": {
+        "childFriendly": "儿童友好",
+        "petFriendly": "宠物友好",
+        "easyClean": "易清洁",
+        "storage": "收纳需求大",
+        "homeOffice": "在家办公"
+    },
+    "budgets": {
+        "economy": "经济型（3000-5000）",
+        "standard": "标准型（5000-10000）",
+        "comfort": "舒适型（10000-20000）",
+        "luxury": "豪华型（20000+）"
+    },
+    "generating": "AI 正在为您生成专属方案...",
+    "alerts": {
+        "photoRequired": "请上传房间照片",
+        "styleRequired": "请至少选择一种风格偏好"
+    },
+    "backToHome": "返回主页",
+    "results": {
+        "title": "您的专属定制方案",
+        "backToCustomize": "返回定制页面",
+        "dataLost": "数据丢失，请重新生成",
+        "parseError": "数据解析失败",
+        "designPlan": {
+            "title": "设计方案",
+            "concept": "设计理念",
+            "features": "核心特点"
+        },
+        "comparison": {
+            "title": "改造前后对比",
+            "before": "改造前",
+            "after": "改造后",
+            "originalPhoto": "原始照片",
+            "aiCustomized": "AI 定制",
+            "renderFailed": "渲染图生成失败"
+        },
+        "shoppingList": {
+            "title": "购物清单",
+            "totalBudget": "预算总计",
+            "secondHand": "二手",
+            "empty": "暂无购物清单"
+        },
+        "roomAnalysis": {
+            "title": "房间分析",
+            "area": "面积",
+            "ceilingHeight": "层高",
+            "naturalLight": "采光",
+            "spaceFeeling": "空间感"
+        },
+        "actions": {
+            "backToHome": "返回主页",
+            "customize": "重新定制"
+        }
+    }
+}

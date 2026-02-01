@@ -9,13 +9,13 @@ const { generateScoringPrompt } = require('../config/prompts');
  * @returns {object} 结构化的 JSON 评分结果
  */
 
-async function getHomeScore(photo, focusArea = null) {
+async function getHomeScore(photo, focusArea = null, language = 'en') {
 
     //const photoPath = photo.path;
     const photoPath = photo.filepath;
     const photoMimeType = photo.mimetype;
     //const photoMimeType = photo.type; // Koa-bodyparser 通常将 mimeType 命名为 type
-    
+
     // 确保文件路径存在
     if (!photoPath) {
         throw new Error("Missing photo file path for scoring.");
@@ -24,7 +24,7 @@ async function getHomeScore(photo, focusArea = null) {
     try {
         // 1. 准备 Gemini API 的输入数据
         const imagePart = fileToGenerativePart(photoPath, photoMimeType);
-        const prompt = generateScoringPrompt(focusArea);
+        const prompt = await generateScoringPrompt(focusArea, language);
 
         // 2. 调用 Gemini API 进行内容生成
         const response = await ai.models.generateContent({
@@ -35,7 +35,7 @@ async function getHomeScore(photo, focusArea = null) {
             ],
             config: {
                 // 要求模型返回严格的 JSON 格式
-                responseMimeType: "application/json", 
+                responseMimeType: "application/json",
                 temperature: 0.1 // 降低温度，要求更客观和一致的输出
             }
         });
@@ -49,7 +49,7 @@ async function getHomeScore(photo, focusArea = null) {
         console.log("--- RAW GEMINI RESPONSE END ---");
 
         try {
-             // Gemini API 响应的 text 字段包含了我们要求输出的 JSON 字符串
+            // Gemini API 响应的 text 字段包含了我们要求输出的 JSON 字符串
             resultJson = JSON.parse(response.text);
         } catch (e) {
             console.error("Gemini did not return valid JSON:", response.text);

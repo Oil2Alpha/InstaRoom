@@ -1,0 +1,122 @@
+{
+    "title": "AI Furniture Swap",
+    "subtitle": "Upload photos, let AI design new furniture solutions for you",
+    "input": {
+        "title": "Upload & Annotate",
+        "backToHome": "Back to Home",
+        "uploadPhoto": "Upload Room Photos (at least 2)",
+        "photosSelected": "photos selected",
+        "chooseFiles": "Choose Files",
+        "noFilesChosen": "No files chosen",
+        "filesChosen": "file(s) chosen",
+        "uploadHint": "Please upload at least 2 photos",
+        "annotate": {
+            "title": "Click on Photo to Mark Furniture Location",
+            "step1": "Please click the <strong>top-left corner</strong> of the furniture",
+            "step2": "Great! Now click the <strong>bottom-right corner</strong> of the furniture",
+            "complete": "Annotation complete! To re-annotate, click the \"Re-annotate\" button below",
+            "reset": "🔄 Re-annotate",
+            "area": "Annotated area:"
+        },
+        "furnitureInfo": {
+            "title": "Furniture Information",
+            "name": "Furniture Name *",
+            "namePlaceholder": "e.g., Sofa, Coffee Table, Bed...",
+            "description": "Furniture Description (Optional)",
+            "descriptionPlaceholder": "e.g., Gray sofa against the wall",
+            "reference": "Reference Object (for measurement)",
+            "referenceObjects": {
+                "Coke_Can": "Coke Can (12.2cm tall)",
+                "Beer_Can": "Beer Can (12.2cm tall)",
+                "A4_Paper": "A4 Paper (29.7cm long)",
+                "Chinese_id_card": "ID Card (8.56cm long)"
+            }
+        },
+        "preferences": {
+            "title": "Preferences",
+            "style": "Style Preference",
+            "styles": {
+                "modern": "Modern",
+                "nordic": "Nordic",
+                "japanese": "Japanese",
+                "european": "European",
+                "chinese": "Chinese",
+                "industrial": "Industrial",
+                "luxury": "Luxury",
+                "minimalist": "Minimalist"
+            },
+            "features": "Special Requirements",
+            "featureTags": {
+                "childFriendly": "Child-friendly",
+                "femaleFriendly": "Female-friendly",
+                "durable": "Durable",
+                "easyClean": "Easy to Clean",
+                "lowCarbon": "Low Carbon",
+                "petFriendly": "Pet-friendly"
+            },
+            "preferUsed": "Prefer Second-hand Furniture",
+            "budget": "Budget Range (Optional)",
+            "budgetMin": "Min Price",
+            "budgetMax": "Max Price"
+        },
+        "submit": "Generate Swap Options",
+        "submitting": "Generating..."
+    },
+    "loading": {
+        "step1": "Step 1/4: AI is measuring furniture dimensions...",
+        "step1Complete": "Step 1/4: Dimension measurement complete!",
+        "step2to4": "Step 2-4: AI is generating swap options..."
+    },
+    "alerts": {
+        "photosRequired": "Please upload at least 2 photos",
+        "nameRequired": "Please enter furniture name",
+        "annotationRequired": "Please click on the photo to mark furniture location",
+        "measureFailed": "Dimension measurement failed:",
+        "generateFailed": "Generation failed:",
+        "networkError": "Network error, please try again later"
+    },
+    "hint": "* AI will analyze your room and generate 2 different style furniture swap options",
+    "dimensionModal": {
+        "title": "Confirm Furniture Dimensions",
+        "subtitle": "AI has automatically measured dimensions, you can adjust manually",
+        "length": "Length (cm)",
+        "width": "Width (cm)",
+        "height": "Height (cm)",
+        "tip": "💡 Tip: Accurate dimensions help AI recommend more suitable furniture",
+        "cancel": "Cancel",
+        "confirm": "Confirm & Continue"
+    },
+    "results": {
+        "title": "AI Swap Options",
+        "subtitle": "Generated {{count}} professional design options for you",
+        "option": "Option",
+        "noData": "No swap data found",
+        "backToInput": "Back to Input",
+        "comparison": {
+            "before": "Current",
+            "after": "With New Furniture"
+        },
+        "aiRendered": "AI Generated Rendering",
+        "originalPhoto": "Original Photo",
+        "furnitureList": {
+            "title": "Furniture List",
+            "dimensions": "Dimensions",
+            "styleKeywords": "Style Keywords",
+            "materials": "Material Tags",
+            "position": "Position",
+            "products": "Recommended Products",
+            "matchScore": "Match"
+        },
+        "environment": {
+            "title": "Room Environment Analysis",
+            "style": "Room Style",
+            "colorMaterial": "Dominant Color Material",
+            "lightDirection": "Light Direction",
+            "shadowIntensity": "Shadow Intensity"
+        },
+        "actions": {
+            "redesign": "Redesign",
+            "backToHome": "Back to Home"
+        }
+    }
+}

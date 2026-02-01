@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Logo from '../components/Logo';
 import Button from '../components/Button';
 import LoadingOverlay from '../components/LoadingOverlay';
@@ -11,6 +12,7 @@ const API_ENDPOINT = 'http://localhost:3000/api/v1/score';
 
 const ScoreInput = () => {
     const navigate = useNavigate();
+    const { t, i18n } = useTranslation(['scoring', 'common']);
     const [photo, setPhoto] = useState(null);
     const [focusArea, setFocusArea] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +36,7 @@ const ScoreInput = () => {
         e.preventDefault();
 
         if (!photo) {
-            alert('请先上传一张房间照片');
+            alert(t('common:photoRequired'));
             return;
         }
 
@@ -47,6 +49,8 @@ const ScoreInput = () => {
             if (focusArea) {
                 formData.append('focusArea', focusArea);
             }
+            // 发送当前语言到后端
+            formData.append('language', i18n.language === 'zh' ? 'zh' : 'en');
 
             console.log('发送请求到:', API_ENDPOINT);
             const response = await fetch(API_ENDPOINT, {
@@ -64,7 +68,7 @@ const ScoreInput = () => {
                 // 验证数据完整性
                 if (!result.data || !result.data.total_score) {
                     console.error('返回的数据格式不正确:', result.data);
-                    alert('评分数据格式错误，请重试');
+                    alert(t('common:error') + ': ' + t('scoring:results.dataError', { defaultValue: '评分数据格式错误，请重试' }));
                     return;
                 }
 
@@ -79,7 +83,7 @@ const ScoreInput = () => {
                     console.log('验证：localStorage 存储成功，数据长度:', storedData.length);
                 } else {
                     console.error('警告：localStorage 存储失败！');
-                    alert('数据存储失败，请检查浏览器设置');
+                    alert(t('common:error') + ': ' + t('scoring:results.storageError', { defaultValue: '数据存储失败，请检查浏览器设置' }));
                     return;
                 }
 
@@ -90,11 +94,11 @@ const ScoreInput = () => {
                 }, 100); // 100ms 延迟
             } else {
                 console.error('评分失败:', result.message);
-                alert('评分失败：' + (result.message || '未知错误'));
+                alert(t('common:error') + ': ' + (result.message || t('common:error')));
             }
         } catch (error) {
             console.error('提交错误:', error);
-            alert('网络错误，请稍后重试');
+            alert(t('scoring:networkError', { defaultValue: '网络错误，请稍后重试' }));
         } finally {
             setIsLoading(false);
         }
@@ -104,7 +108,7 @@ const ScoreInput = () => {
         // 1. 移动端容器和背景
         <div className="min-h-screen bg-gray-50 font-sans flex flex-col items-center justify-start py-8 px-4">
             {/* 加载遮罩 */}
-            <LoadingOverlay isLoading={isLoading} />
+            <LoadingOverlay isLoading={isLoading} message={t('analyzing')} />
 
             {/* 返回主页按钮 */}
             <div className="w-full max-w-lg mb-4">
@@ -115,7 +119,7 @@ const ScoreInput = () => {
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
-                    返回主页
+                    {t('common:backToHome')}
                 </button>
             </div>
 
@@ -126,10 +130,10 @@ const ScoreInput = () => {
             {/* 2. 杂志风格标题区 */}
             <header className="w-full max-w-lg text-center mt-6 mb-10">
                 <h1 className="font-serif text-5xl font-extrabold text-gray-900 leading-tight tracking-tight">
-                    读懂家的美学脉络
+                    {t('uploadTitle')}
                 </h1>
                 <p className="mt-3 text-lg text-gray-500 max-w-sm mx-auto">
-                    上传房间照片，AI 驱动的专业设计师将从功能、美学和光影角度给出深度分析。
+                    {t('uploadDescription')}
                 </p>
             </header>
 
@@ -141,14 +145,14 @@ const ScoreInput = () => {
                     {/* 3a. 关注点输入 (卡片风格) */}
                     <div className="p-4 border border-gray-200 rounded-xl">
                         <label htmlFor="focusArea" className="block text-sm font-serif font-semibold text-gray-900 mb-1">
-                            关注点 (可选)
+                            {t('focusArea', { defaultValue: '关注点 (可选)' })}
                         </label>
                         <input
                             type="text"
                             id="focusArea"
                             value={focusArea}
                             onChange={(e) => setFocusArea(e.target.value)}
-                            placeholder="例如：收纳空间，照明设计"
+                            placeholder={t('focusAreaPlaceholder', { defaultValue: '例如：收纳空间，照明设计' })}
                             className="w-full border-0 focus:ring-0 p-0 text-base placeholder-gray-400"
                         />
                     </div>
@@ -156,7 +160,7 @@ const ScoreInput = () => {
                     {/* 3b. 文件上传区 (突出视觉引导) */}
                     <div className="space-y-2">
                         <label className="block text-sm font-serif font-semibold text-gray-900 mb-1">
-                            拍摄/上传房间照片
+                            {t('uploadPhotoLabel', { defaultValue: '拍摄/上传房间照片' })}
                         </label>
                         <div className="flex justify-center px-6 pt-5 pb-6 border-2 border-[#FF8C00] border-dashed rounded-xl cursor-pointer bg-orange-50/50 hover:bg-orange-100 transition duration-300"
                             onClick={() => document.getElementById('file-upload').click()}>
@@ -167,10 +171,10 @@ const ScoreInput = () => {
                                 </svg>
 
                                 <p className="text-sm font-medium text-gray-700">
-                                    {photo ? `已选: ${photo.name} ` : '点击或拖放至此上传'}
+                                    {photo ? `${t('photoSelected', { defaultValue: '已选' })}: ${photo.name}` : t('common:dragDropPhoto')}
                                 </p>
                                 <p className="text-xs text-gray-400">
-                                    仅支持 JPG, PNG，确保光线充足。
+                                    {t('photoHint', { defaultValue: '仅支持 JPG, PNG，确保光线充足。' })}
                                 </p>
                                 <input id="file-upload" name="photo" type="file" className="sr-only" accept="image/*" onChange={handleFileChange} />
                             </div>
@@ -184,7 +188,7 @@ const ScoreInput = () => {
                             disabled={!photo || isLoading}
                             className="w-full md:w-auto px-12 py-4 bg-gradient-to-r from-[#FF8C00] to-[#cc7000] hover:from-[#cc7000] hover:to-[#FF8C00] text-white font-semibold rounded-xl shadow-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                         >
-                            {isLoading ? '正在评分...' : '开始 AI 评分'}
+                            {isLoading ? t('analyzing') : t('startAnalysis', { defaultValue: '开始 AI 评分' })}
                         </Button>
                     </div>
                 </form>

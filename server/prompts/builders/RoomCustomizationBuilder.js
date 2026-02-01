@@ -4,14 +4,17 @@ const BasePromptBuilder = require('./BasePromptBuilder');
 
 /**
  * 房间定制 Prompt 构建器
- * 专门用于房间分析功能
+ * 专门用于房间分析功能，支持多语言
  */
 class RoomCustomizationBuilder extends BasePromptBuilder {
-    constructor() {
-        super(
-            'room-customization/room-analysis.xml',
-            'room-customization/room-analysis-examples.json'
-        );
+    constructor(language = 'zh') {
+        // 根据语言选择对应的模板和示例文件
+        const lang = language === 'en' ? 'en' : 'zh';
+        const templatePath = `room-customization/room-analysis.${lang}.xml`;
+        const examplesPath = `room-customization/room-analysis-examples.${lang}.json`;
+
+        super(templatePath, examplesPath);
+        this.language = lang;
     }
 
     /**
@@ -20,7 +23,8 @@ class RoomCustomizationBuilder extends BasePromptBuilder {
      * @returns {RoomCustomizationBuilder} this
      */
     setRoomTypeHint(hint) {
-        return this.setVariable('room_type_hint', hint || '未知');
+        const defaultHint = this.language === 'en' ? 'Unknown' : '未知';
+        return this.setVariable('room_type_hint', hint || defaultHint);
     }
 
     /**

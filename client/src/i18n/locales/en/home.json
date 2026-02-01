@@ -1,0 +1,31 @@
+{
+    "welcome": "Make Your Home Understand You",
+    "subtitle": "AI-Powered Smart Home Design Platform",
+    "description": "From assessment to customization, one-stop solution for your ideal space",
+    "analyze": "Analysis",
+    "features": {
+        "title": "Our Features",
+        "roomScoring": {
+            "title": "Room Scoring",
+            "subtitle": "Smart Recommendation",
+            "description": "Professional designer perspective, in-depth analysis of your space from functionality, aesthetics, lighting and more",
+            "cta": "Start Experience"
+        },
+        "furnitureSwap": {
+            "title": "Furniture Swap",
+            "subtitle": "Smart Recommendations",
+            "description": "Precise size calculation, style matching, recommend the best furniture replacement solutions for you",
+            "cta": "Start Experience"
+        },
+        "roomCustomization": {
+            "title": "Whole Home Customization",
+            "subtitle": "Style Customization",
+            "description": "Upload photos of your hard decoration, AI customizes exclusive soft decoration plans for you, from design to shopping list all in one",
+            "cta": "Start Experience"
+        }
+    },
+    "footer": {
+        "copyright": "© 2026 InstaRoom. All rights reserved.",
+        "madeWith": "Made with ❤️ for Google Hackathon"
+    }
+}

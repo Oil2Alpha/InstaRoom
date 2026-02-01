@@ -1,17 +1,18 @@
 // src/pages/PlacementResult.jsx
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Logo from '../components/Logo';
 
 const PlacementResult = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation(['placement', 'common']);
     const [placementData, setPlacementData] = useState(null);
     const [userPhoto, setUserPhoto] = useState(null);
-    const [selectedOption, setSelectedOption] = useState(0); // 当前选中的方案（0 或 1）
-    const [expandedFurniture, setExpandedFurniture] = useState(null); // 展开的家具索引
+    const [selectedOption, setSelectedOption] = useState(0);
+    const [expandedFurniture, setExpandedFurniture] = useState(null);
 
     useEffect(() => {
-        // 从 localStorage 读取数据
         const storedData = localStorage.getItem('placementResult');
         const storedPhoto = localStorage.getItem('placementPhoto');
 
@@ -19,12 +20,12 @@ const PlacementResult = () => {
             try {
                 const data = JSON.parse(storedData);
                 setPlacementData(data);
-                console.log('置换数据:', data);
+                console.log('Placement data:', data);
             } catch (error) {
-                console.error('解析数据失败:', error);
+                console.error('Parse data failed:', error);
             }
         } else {
-            console.warn('未找到置换数据');
+            console.warn('No placement data found');
         }
 
         if (storedPhoto) {
@@ -36,12 +37,12 @@ const PlacementResult = () => {
         return (
             <div className="min-h-screen bg-gray-50 flex items-center justify-center">
                 <div className="text-center">
-                    <p className="text-gray-600 mb-4">未找到置换数据</p>
+                    <p className="text-gray-600 mb-4">{t('results.noData')}</p>
                     <button
                         onClick={() => navigate('/placement/input')}
                         className="px-6 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600"
                     >
-                        返回输入页面
+                        {t('results.backToInput')}
                     </button>
                 </div>
             </div>
@@ -68,15 +69,15 @@ const PlacementResult = () => {
                     className="mb-6 text-gray-600 hover:text-gray-900 flex items-center gap-2 transition-colors"
                 >
                     <span>←</span>
-                    <span>返回主页</span>
+                    <span>{t('results.actions.backToHome')}</span>
                 </button>
 
                 {/* 标题 */}
                 <div className="text-center mb-8">
                     <h1 className="text-4xl font-bold bg-gradient-to-r from-orange-600 to-pink-600 bg-clip-text text-transparent mb-2">
-                        AI 置换方案
+                        {t('results.title')}
                     </h1>
-                    <p className="text-gray-600">为您生成了 {placementData.options.length} 套专业设计方案</p>
+                    <p className="text-gray-600">{t('results.subtitle', { count: placementData.options.length })}</p>
                 </div>
 
                 {/* 方案切换 Tab */}
@@ -86,11 +87,11 @@ const PlacementResult = () => {
                             key={option.id}
                             onClick={() => setSelectedOption(index)}
                             className={`px-8 py-3 rounded-full font-semibold transition-all ${selectedOption === index
-                                    ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-lg'
-                                    : 'bg-white text-gray-700 hover:bg-gray-50 shadow'
+                                ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow-lg'
+                                : 'bg-white text-gray-700 hover:bg-gray-50 shadow'
                                 }`}
                         >
-                            方案 {option.id}
+                            {t('results.option')} {option.id}
                         </button>
                     ))}
                 </div>
@@ -106,10 +107,10 @@ const PlacementResult = () => {
                     {/* 效果图展示 */}
                     {currentOption.renderedImage && (
                         <div className="bg-white rounded-2xl shadow-lg p-6">
-                            <h3 className="text-xl font-semibold mb-4">AI 生成效果图</h3>
+                            <h3 className="text-xl font-semibold mb-4">{t('results.aiRendered')}</h3>
                             <img
                                 src={`data:image/png;base64,${currentOption.renderedImage}`}
-                                alt="置换效果图"
+                                alt="Rendered"
                                 className="w-full rounded-lg"
                             />
                         </div>
@@ -118,10 +119,10 @@ const PlacementResult = () => {
                     {/* 原始照片对比 */}
                     {userPhoto && (
                         <div className="bg-white rounded-2xl shadow-lg p-6">
-                            <h3 className="text-xl font-semibold mb-4">原始照片</h3>
+                            <h3 className="text-xl font-semibold mb-4">{t('results.originalPhoto')}</h3>
                             <img
                                 src={userPhoto}
-                                alt="原始照片"
+                                alt="Original"
                                 className="w-full rounded-lg"
                             />
                         </div>
@@ -129,7 +130,7 @@ const PlacementResult = () => {
 
                     {/* 家具清单 */}
                     <div className="bg-white rounded-2xl shadow-lg p-6">
-                        <h3 className="text-xl font-semibold mb-4">家具清单</h3>
+                        <h3 className="text-xl font-semibold mb-4">{t('results.furnitureList.title')}</h3>
                         <div className="space-y-4">
                             {currentOption.furnitureList.map((furniture, index) => (
                                 <div key={index} className="border border-gray-200 rounded-lg overflow-hidden">
@@ -161,7 +162,7 @@ const PlacementResult = () => {
                                         <div className="p-4 space-y-4">
                                             {/* 风格和材质标签 */}
                                             <div>
-                                                <p className="text-sm font-medium text-gray-700 mb-2">风格关键词</p>
+                                                <p className="text-sm font-medium text-gray-700 mb-2">{t('results.furnitureList.styleKeywords')}</p>
                                                 <div className="flex flex-wrap gap-2">
                                                     {furniture.styleKeywords.map((keyword, i) => (
                                                         <span key={i} className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm">
@@ -173,7 +174,7 @@ const PlacementResult = () => {
 
                                             {furniture.materialTags && (
                                                 <div>
-                                                    <p className="text-sm font-medium text-gray-700 mb-2">材质标签</p>
+                                                    <p className="text-sm font-medium text-gray-700 mb-2">{t('results.furnitureList.materials')}</p>
                                                     <div className="flex flex-wrap gap-2">
                                                         {furniture.materialTags.map((tag, i) => (
                                                             <span key={i} className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
@@ -185,7 +186,7 @@ const PlacementResult = () => {
                                             )}
 
                                             <div>
-                                                <p className="text-sm font-medium text-gray-700 mb-1">位置</p>
+                                                <p className="text-sm font-medium text-gray-700 mb-1">{t('results.furnitureList.position')}</p>
                                                 <p className="text-sm text-gray-600">{furniture.position}</p>
                                             </div>
 
@@ -193,7 +194,7 @@ const PlacementResult = () => {
                                             {furniture.recommendedProducts && furniture.recommendedProducts.length > 0 && (
                                                 <div>
                                                     <p className="text-sm font-medium text-gray-700 mb-3">
-                                                        推荐商品（{furniture.recommendedProducts.length}个）
+                                                        {t('results.furnitureList.products')}（{furniture.recommendedProducts.length}）
                                                     </p>
                                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                                         {furniture.recommendedProducts.map((product) => (
@@ -207,7 +208,7 @@ const PlacementResult = () => {
                                                                 <div className="flex items-center justify-between">
                                                                     <span className="text-orange-600 font-bold">¥{product.price}</span>
                                                                     <span className="text-xs text-gray-500">
-                                                                        匹配度 {Math.round(product.matchScore * 100)}%
+                                                                        {t('results.furnitureList.matchScore')} {Math.round(product.matchScore * 100)}%
                                                                     </span>
                                                                 </div>
                                                                 <p className="text-xs text-gray-500 mt-1">
@@ -233,22 +234,22 @@ const PlacementResult = () => {
                     {/* 环境分析信息 */}
                     {placementData.environment && (
                         <div className="bg-white rounded-2xl shadow-lg p-6">
-                            <h3 className="text-xl font-semibold mb-4">房间环境分析</h3>
+                            <h3 className="text-xl font-semibold mb-4">{t('results.environment.title')}</h3>
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                 <div>
-                                    <p className="text-sm text-gray-600">房间风格</p>
+                                    <p className="text-sm text-gray-600">{t('results.environment.style')}</p>
                                     <p className="font-medium">{placementData.environment.inherent_style}</p>
                                 </div>
                                 <div>
-                                    <p className="text-sm text-gray-600">主色调材质</p>
+                                    <p className="text-sm text-gray-600">{t('results.environment.colorMaterial')}</p>
                                     <p className="font-medium">{placementData.environment.dominant_color_material}</p>
                                 </div>
                                 <div>
-                                    <p className="text-sm text-gray-600">光照方向</p>
+                                    <p className="text-sm text-gray-600">{t('results.environment.lightDirection')}</p>
                                     <p className="font-medium">{placementData.environment.light_source_direction}</p>
                                 </div>
                                 <div>
-                                    <p className="text-sm text-gray-600">阴影强度</p>
+                                    <p className="text-sm text-gray-600">{t('results.environment.shadowIntensity')}</p>
                                     <p className="font-medium">{placementData.environment.shadow_intensity}</p>
                                 </div>
                             </div>
@@ -261,13 +262,13 @@ const PlacementResult = () => {
                             onClick={() => navigate('/placement/input')}
                             className="px-8 py-3 bg-white text-gray-700 rounded-full shadow-lg hover:shadow-xl transition-all"
                         >
-                            重新设计
+                            {t('results.actions.redesign')}
                         </button>
                         <button
                             onClick={() => navigate('/')}
                             className="px-8 py-3 bg-gradient-to-r from-orange-500 to-pink-500 text-white rounded-full shadow-lg hover:shadow-xl transition-all"
                         >
-                            返回主页
+                            {t('results.actions.backToHome')}
                         </button>
                     </div>
                 </div>

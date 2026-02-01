@@ -1,51 +1,40 @@
 // src/components/LoadingOverlay.jsx
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const LoadingOverlay = ({
     isLoading,
     message,  // 自定义消息
     progress: externalProgress,  // 外部控制的进度（0-100）
-    duration = 7000  // 默认持续时间（毫秒）
+    duration = 7000,  // 默认持续时间（毫秒）
+    type = 'auto'  // 'placement', 'scoring', 或 'auto'（根据 message 自动判断）
 }) => {
+    const { t, i18n } = useTranslation('common');
     const [progress, setProgress] = useState(0);
     const [currentStep, setCurrentStep] = useState(0);
 
-    // 家具置换的加载步骤（有趣版）
-    const placementSteps = [
-        { icon: '📸', text: '正在分析上传的照片...' },
-        { icon: '📏', text: 'AI 正在拿着卷尺测量家具...' },
-        { icon: '🤔', text: 'AI 正在思考这个沙发有多重...' },
-        { icon: '🏠', text: 'AI 跑去家具城逛了一圈...' },
-        { icon: '🎨', text: '正在翻阅家居杂志找灵感...' },
-        { icon: '☕', text: 'AI 喝了口咖啡，继续工作...' },
-        { icon: '💡', text: '灵感来了！正在生成方案...' },
-        { icon: '🛋️', text: 'AI 正在搬运虚拟家具...' },
-        { icon: '✨', text: '给效果图加点魔法特效...' },
-        { icon: '🛍️', text: '正在电商平台疯狂比价...' },
-        { icon: '🎯', text: '精挑细选最适合您的家具...' },
-        { icon: '🎁', text: '马上就好，正在打包方案...' }
-    ];
+    // 从翻译文件获取加载步骤
+    const placementSteps = t('loadingSteps.placement', { returnObjects: true }) || [];
+    const scoringSteps = t('loadingSteps.scoring', { returnObjects: true }) || [];
 
-    // 房间评分的加载步骤（有趣版）
-    const scoringSteps = [
-        { icon: '🔍', text: '正在分析房间光影...' },
-        { icon: '👀', text: 'AI 正在仔细打量您的房间...' },
-        { icon: '🎨', text: '识别空间风格...' },
-        { icon: '🤓', text: 'AI 戴上眼镜，认真评分中...' },
-        { icon: '📐', text: '评估家具布局...' },
-        { icon: '🧐', text: 'AI 正在挑剔地检查细节...' },
-        { icon: '💡', text: '检测照明氛围...' },
-        { icon: '☕', text: 'AI 摸了个鱼，喝口茶...' },
-        { icon: '✨', text: '生成改进建议...' },
-        { icon: '📝', text: 'AI 正在写评语，措辞要优雅...' },
-        { icon: '🎯', text: '计算综合评分...' },
-        { icon: '🎉', text: '即将揭晓您的房间得分...' }
-    ];
+    // 根据 type 或 message 判断使用哪组步骤
+    const getLoadingSteps = () => {
+        if (type === 'placement') return placementSteps;
+        if (type === 'scoring') return scoringSteps;
 
-    // 根据消息判断使用哪组步骤
-    const loadingSteps = message && (message.includes('置换') || message.includes('家具') || message.includes('尺寸'))
-        ? placementSteps
-        : scoringSteps;
+        // auto 模式：根据消息内容判断
+        if (message) {
+            const lowerMessage = message.toLowerCase();
+            if (lowerMessage.includes('置换') || lowerMessage.includes('家具') ||
+                lowerMessage.includes('尺寸') || lowerMessage.includes('furniture') ||
+                lowerMessage.includes('swap') || lowerMessage.includes('dimension')) {
+                return placementSteps;
+            }
+        }
+        return scoringSteps;
+    };
+
+    const loadingSteps = getLoadingSteps();
 
     useEffect(() => {
         if (!isLoading) {
@@ -74,7 +63,7 @@ const LoadingOverlay = ({
 
         // 文字切换动画（每1秒切换一次，更慢更从容）
         const stepInterval = setInterval(() => {
-            setCurrentStep(prev => (prev + 1) % loadingSteps.length);
+            setCurrentStep(prev => (prev + 1) % (loadingSteps.length || 1));
         }, 1000);
 
         return () => {
@@ -85,19 +74,22 @@ const LoadingOverlay = ({
 
     if (!isLoading) return null;
 
+    // 安全获取当前步骤
+    const currentStepData = loadingSteps[currentStep] || { icon: '⏳', text: t('loading') };
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/20 backdrop-blur-md animate-fadeIn">
             <div className="bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl p-8 md:p-12 max-w-md w-full mx-4 border border-white/50">
                 {/* 图标和文字 */}
                 <div className="text-center mb-8">
                     <div className="text-6xl mb-4 animate-bounce">
-                        {loadingSteps[currentStep].icon}
+                        {currentStepData.icon}
                     </div>
                     <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                        {message || 'AI 正在分析您的空间'}
+                        {message || t('defaultLoadingMessage')}
                     </h3>
                     <p className="text-base text-gray-600 transition-all duration-300">
-                        {loadingSteps[currentStep].text}
+                        {currentStepData.text}
                     </p>
                 </div>
 

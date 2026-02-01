@@ -4,20 +4,23 @@ const BasePromptBuilder = require('./BasePromptBuilder');
 
 /**
  * 梦中情家 Prompt 构建器
+ * 支持多语言
  */
 class DreamHomeBuilder extends BasePromptBuilder {
     /**
      * 创建改造指令构建器
+     * @param {string} language - 语言参数 ('en' 或 'zh')
      */
-    static createImprovementBuilder() {
-        return new DreamHomeImprovementBuilder();
+    static createImprovementBuilder(language = 'en') {
+        return new DreamHomeImprovementBuilder(language);
     }
 
     /**
      * 创建购物清单构建器
+     * @param {string} language - 语言参数 ('en' 或 'zh')
      */
-    static createShoppingListBuilder() {
-        return new DreamHomeShoppingListBuilder();
+    static createShoppingListBuilder(language = 'en') {
+        return new DreamHomeShoppingListBuilder(language);
     }
 }
 
@@ -25,8 +28,10 @@ class DreamHomeBuilder extends BasePromptBuilder {
  * 梦中情家 - 改造指令构建器
  */
 class DreamHomeImprovementBuilder extends BasePromptBuilder {
-    constructor() {
-        super('dream-home/improvement-prompt.xml');
+    constructor(language = 'en') {
+        const lang = language === 'zh' ? 'zh' : 'en';
+        super(`dream-home/improvement-prompt.${lang}.xml`);
+        this.language = lang;
     }
 
     /**
@@ -38,7 +43,8 @@ class DreamHomeImprovementBuilder extends BasePromptBuilder {
         const { score, suggestions } = scoreData;
 
         // 格式化建议
-        let suggestionTexts = '无具体建议';
+        const noSuggestion = this.language === 'zh' ? '无具体建议' : 'No specific suggestions';
+        let suggestionTexts = noSuggestion;
         if (suggestions && suggestions.length > 0) {
             suggestionTexts = suggestions.map(s => {
                 const text = typeof s === 'string' ? s : (s.suggestion || s);
@@ -57,11 +63,13 @@ class DreamHomeImprovementBuilder extends BasePromptBuilder {
  * 梦中情家 - 购物清单构建器
  */
 class DreamHomeShoppingListBuilder extends BasePromptBuilder {
-    constructor() {
+    constructor(language = 'en') {
+        const lang = language === 'zh' ? 'zh' : 'en';
         super(
-            'dream-home/shopping-list.xml',
-            'dream-home/shopping-list-examples.json'
+            `dream-home/shopping-list.${lang}.xml`,
+            `dream-home/shopping-list-examples.${lang}.json`
         );
+        this.language = lang;
     }
 
     /**
@@ -70,8 +78,9 @@ class DreamHomeShoppingListBuilder extends BasePromptBuilder {
      * @returns {DreamHomeShoppingListBuilder} this
      */
     setSuggestions(suggestions) {
+        const noSuggestion = this.language === 'zh' ? '无具体建议' : 'No specific suggestions';
         if (!suggestions || suggestions.length === 0) {
-            this.setVariable('suggestions', '无具体建议');
+            this.setVariable('suggestions', noSuggestion);
             return this;
         }
 
@@ -97,18 +106,19 @@ class DreamHomeShoppingListBuilder extends BasePromptBuilder {
             return this;
         }
 
-        // 根据建议内容匹配示例类别
+        // 根据建议内容匹配示例类别（支持中英文关键词）
         const categories = [];
         suggestions.forEach(s => {
             const text = (typeof s === 'string' ? s : (s.suggestion || s)).toLowerCase();
-            if (text.includes('绿植') || text.includes('植物')) {
-                categories.push('增加绿植');
+            // 中英文关键词匹配
+            if (text.includes('绿植') || text.includes('植物') || text.includes('plant') || text.includes('greenery')) {
+                categories.push(this.language === 'zh' ? '增加绿植' : 'Add Plants');
             }
-            if (text.includes('照明') || text.includes('灯')) {
-                categories.push('改善照明');
+            if (text.includes('照明') || text.includes('灯') || text.includes('light') || text.includes('lamp')) {
+                categories.push(this.language === 'zh' ? '改善照明' : 'Improve Lighting');
             }
-            if (text.includes('装饰') || text.includes('挂画') || text.includes('抱枕')) {
-                categories.push('增加装饰');
+            if (text.includes('装饰') || text.includes('挂画') || text.includes('抱枕') || text.includes('decor') || text.includes('art') || text.includes('pillow')) {
+                categories.push(this.language === 'zh' ? '增加装饰' : 'Add Decorations');
             }
         });
 

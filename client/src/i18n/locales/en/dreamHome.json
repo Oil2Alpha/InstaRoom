@@ -1,0 +1,35 @@
+{
+    "title": "Dream Home Generator",
+    "subtitle": "AI crafted ideal space for you",
+    "generating": "AI is creating your dream home...",
+    "backToScore": "Back to Score Result",
+    "results": {
+        "title": "Your Dream Home",
+        "dataLost": "Data lost, please regenerate",
+        "parseError": "Data parsing failed",
+        "comparison": {
+            "title": "Before & After Comparison",
+            "before": "Before",
+            "after": "After",
+            "originalPhoto": "Original Photo",
+            "aiRendered": "AI Rendered",
+            "renderFailed": "Rendering failed"
+        },
+        "shoppingList": {
+            "title": "🛍️ AI Recommended Shopping List",
+            "totalCost": "Estimated Total",
+            "empty": "No shopping list available",
+            "item": {
+                "category": "Category",
+                "name": "Item",
+                "price": "Price",
+                "tags": "Tags",
+                "reason": "Why This Item"
+            }
+        },
+        "actions": {
+            "backToScore": "← Back to Score Result",
+            "backToHome": "Back to Home 🏠"
+        }
+    }
+}

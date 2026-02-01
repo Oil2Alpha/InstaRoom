@@ -1,0 +1,112 @@
+{
+    "examples": [
+        {
+            "id": "shopping_list_greenery",
+            "category": "Add Plants",
+            "input": {
+                "suggestions": [
+                    "Add plants to bring life to the space",
+                    "Improve air quality"
+                ]
+            },
+            "output": {
+                "items": [
+                    {
+                        "category": "Plants",
+                        "name": "Monstera (Medium)",
+                        "tags": [
+                            "Air Purifying",
+                            "Shade-tolerant",
+                            "Low Maintenance"
+                        ],
+                        "reason": "Purifies air and adds vitality to space",
+                        "estimatedPrice": "80-150"
+                    },
+                    {
+                        "category": "Plants",
+                        "name": "Fiddle Leaf Fig (Small)",
+                        "tags": [
+                            "Decorative",
+                            "Scandinavian Style",
+                            "Low Maintenance"
+                        ],
+                        "reason": "Large leaves, perfect for modern minimalist style",
+                        "estimatedPrice": "50-100"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "shopping_list_lighting",
+            "category": "Improve Lighting",
+            "input": {
+                "suggestions": [
+                    "Add ambient lighting to enhance atmosphere",
+                    "Improve reading area lighting"
+                ]
+            },
+            "output": {
+                "items": [
+                    {
+                        "category": "Lighting",
+                        "name": "Scandinavian Floor Lamp",
+                        "tags": [
+                            "Warm Light",
+                            "Dimmable",
+                            "Eye-care"
+                        ],
+                        "reason": "Enhances atmosphere, great for reading",
+                        "estimatedPrice": "200-400"
+                    },
+                    {
+                        "category": "Lighting",
+                        "name": "LED Eye-care Desk Lamp",
+                        "tags": [
+                            "Eye-care",
+                            "Dimmable",
+                            "Energy Efficient"
+                        ],
+                        "reason": "Perfect for work and study, protects eyes",
+                        "estimatedPrice": "150-300"
+                    }
+                ]
+            }
+        },
+        {
+            "id": "shopping_list_decoration",
+            "category": "Add Decorations",
+            "input": {
+                "suggestions": [
+                    "Add wall decorations to enrich visual layers",
+                    "Add soft furnishings to enhance coziness"
+                ]
+            },
+            "output": {
+                "items": [
+                    {
+                        "category": "Decor",
+                        "name": "Abstract Art Print",
+                        "tags": [
+                            "Modern Minimalist",
+                            "Artistic",
+                            "Versatile"
+                        ],
+                        "reason": "Enriches wall space, adds artistic touch",
+                        "estimatedPrice": "100-200"
+                    },
+                    {
+                        "category": "Decor",
+                        "name": "Scandinavian Throw Pillow Covers (2 pcs)",
+                        "tags": [
+                            "Cozy",
+                            "Comfortable",
+                            "Washable"
+                        ],
+                        "reason": "Adds color accent, improves comfort",
+                        "estimatedPrice": "50-100"
+                    }
+                ]
+            }
+        }
+    ]
+}

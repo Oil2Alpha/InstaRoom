@@ -2,20 +2,22 @@
 
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Logo from '../components/Logo';
 
 const DreamHomeResult = () => {
     const [data, setData] = useState(null);
     const [originalPhoto, setOriginalPhoto] = useState(null);
     const navigate = useNavigate();
+    const { t } = useTranslation(['dreamHome', 'common']);
 
     useEffect(() => {
-        // 从 sessionStorage 读取数据（配额更大）
+        // 从 sessionStorage 读取数据
         const resultData = sessionStorage.getItem('dreamHomeResult');
         const photoData = sessionStorage.getItem('dreamHomeOriginalPhoto');
 
         if (!resultData || !photoData) {
-            alert('数据丢失，请重新生成');
+            alert(t('results.dataLost'));
             navigate('/score/result');
             return;
         }
@@ -25,18 +27,18 @@ const DreamHomeResult = () => {
             setData(parsedData);
             setOriginalPhoto(photoData);
         } catch (error) {
-            console.error('数据解析错误:', error);
-            alert('数据解析失败');
+            console.error('Data parsing error:', error);
+            alert(t('results.parseError'));
             navigate('/score/result');
         }
-    }, [navigate]);
+    }, [navigate, t]);
 
     if (!data) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 via-purple-50/30 to-gray-100">
                 <div className="text-center">
                     <div className="animate-spin rounded-full h-16 w-16 border-b-4 border-purple-500 mx-auto mb-4"></div>
-                    <p className="text-gray-600">加载中...</p>
+                    <p className="text-gray-600">{t('common:loading')}</p>
                 </div>
             </div>
         );
@@ -53,7 +55,7 @@ const DreamHomeResult = () => {
                     <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
-                    返回评分结果
+                    {t('backToScore')}
                 </button>
 
                 {/* Logo */}
@@ -65,48 +67,48 @@ const DreamHomeResult = () => {
                 <div className="text-center mb-8">
                     <h1 className="text-4xl md:text-5xl font-bold mb-3">
                         <span className="bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 bg-clip-text text-transparent">
-                            ✨ 您的梦中情家
+                            ✨ {t('results.title')}
                         </span>
                     </h1>
-                    <p className="text-gray-600 text-lg">AI 为您精心打造的理想空间</p>
+                    <p className="text-gray-600 text-lg">{t('subtitle')}</p>
                 </div>
 
                 {/* 对比展示 */}
                 <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 mb-8">
-                    <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">改造前后对比</h2>
+                    <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">{t('results.comparison.title')}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         {/* 原始照片 */}
                         <div className="space-y-3">
-                            <h3 className="text-lg font-semibold text-gray-700 text-center">改造前</h3>
+                            <h3 className="text-lg font-semibold text-gray-700 text-center">{t('results.comparison.before')}</h3>
                             <div className="relative rounded-2xl overflow-hidden shadow-lg border-4 border-gray-200">
                                 <img
                                     src={originalPhoto}
-                                    alt="原始房间"
+                                    alt="Original"
                                     className="w-full h-auto"
                                 />
                                 <div className="absolute top-3 left-3 bg-black/50 text-white px-3 py-1 rounded-lg text-sm">
-                                    原始照片
+                                    {t('results.comparison.originalPhoto')}
                                 </div>
                             </div>
                         </div>
 
                         {/* 渲染效果图 */}
                         <div className="space-y-3">
-                            <h3 className="text-lg font-semibold text-gray-700 text-center">改造后</h3>
+                            <h3 className="text-lg font-semibold text-gray-700 text-center">{t('results.comparison.after')}</h3>
                             <div className="relative rounded-2xl overflow-hidden shadow-lg border-4 border-purple-200">
                                 {data.renderedImage ? (
                                     <img
                                         src={`data:image/jpeg;base64,${data.renderedImage}`}
-                                        alt="梦中情家"
+                                        alt="Dream Home"
                                         className="w-full h-auto"
                                     />
                                 ) : (
                                     <div className="w-full h-64 bg-gray-100 flex items-center justify-center">
-                                        <p className="text-gray-500">渲染图生成失败</p>
+                                        <p className="text-gray-500">{t('results.comparison.renderFailed')}</p>
                                     </div>
                                 )}
                                 <div className="absolute top-3 left-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-3 py-1 rounded-lg text-sm">
-                                    ✨ AI 渲染
+                                    ✨ {t('results.comparison.aiRendered')}
                                 </div>
                             </div>
                         </div>
@@ -117,7 +119,7 @@ const DreamHomeResult = () => {
                 <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 mb-8">
                     <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
                         <span className="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">
-                            🛍️ AI 推荐购物清单
+                            {t('results.shoppingList.title')}
                         </span>
                     </h2>
 
@@ -161,7 +163,7 @@ const DreamHomeResult = () => {
                             ))}
                         </div>
                     ) : (
-                        <p className="text-gray-500 text-center py-8">暂无购物清单</p>
+                        <p className="text-gray-500 text-center py-8">{t('results.shoppingList.empty')}</p>
                     )}
                 </div>
 
@@ -171,13 +173,13 @@ const DreamHomeResult = () => {
                         onClick={() => navigate('/score/result')}
                         className="w-full py-4 px-6 rounded-xl shadow-lg text-lg font-medium text-gray-700 bg-white hover:bg-gray-50 border-2 border-gray-200 hover:border-purple-500 transition-all duration-200"
                     >
-                        ← 返回评分结果
+                        {t('results.actions.backToScore')}
                     </button>
                     <button
                         onClick={() => navigate('/')}
                         className="w-full py-4 px-6 rounded-xl shadow-lg text-lg font-medium text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 transition-all duration-200"
                     >
-                        返回主页 🏠
+                        {t('results.actions.backToHome')}
                     </button>
                 </div>
             </div>

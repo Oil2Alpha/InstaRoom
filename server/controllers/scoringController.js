@@ -18,7 +18,7 @@ async function getScore(ctx) {
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
     let photo = null;
-    
+
     // 检查 files 对象中是否包含名为 'photo' 的字段
     // if (files && files.photo) {
     //     photo = files.photo; 
@@ -40,13 +40,15 @@ async function getScore(ctx) {
         ctx.body = { success: false, message: "请上传一张房间照片进行评分。" };
         return;
     }
-    
-    // 可选：提取用户关注点 (focusArea)
+
+
+    // 可选：提取用户关注点 (focusArea) 和语言偏好 (language)
     const focusArea = fields ? fields.focusArea : null;
+    const language = fields ? (fields.language || 'en') : 'en'; // 默认使用英文（Hackathon）
 
     try {
-        // 2. 调用核心服务逻辑
-        const scoreResult = await scoringService.getHomeScore(photo, focusArea);
+        // 2. 调用核心服务逻辑，传入语言参数
+        const scoreResult = await scoringService.getHomeScore(photo, focusArea, language);
 
         // 3. 返回成功响应
         ctx.status = 200;

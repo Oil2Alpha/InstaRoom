@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Logo from '../components/Logo';
 import scoringIcon from '../assets/images/scoring_icon.png';
 import furnitureSwapIcon from '../assets/images/furniture_swap_icon.png';
@@ -9,37 +10,41 @@ import wholeHomeIcon from '../assets/images/whole_home_icon.png';
 
 const Home = () => {
     const navigate = useNavigate();
+    const { t } = useTranslation('home');
 
     const features = [
         {
             id: 1,
-            title: '房间评分',
-            subtitle: 'AI 智能评估',
-            description: '专业设计师视角，从功能、美学、照明等维度深度分析您的空间',
+            title: t('features.roomScoring.title'),
+            subtitle: 'AI ' + t('analyze'),
+            description: t('features.roomScoring.description'),
             icon: scoringIcon,
             route: '/score/input',
             color: 'from-orange-400 to-orange-600',
-            available: true
+            available: true,
+            cta: t('features.roomScoring.cta')
         },
         {
             id: 2,
-            title: '家具置换',
-            subtitle: '智能推荐方案',
-            description: '精准尺寸计算，风格匹配，为您推荐最适合的家具替换方案',
+            title: t('features.furnitureSwap.title'),
+            subtitle: t('features.furnitureSwap.subtitle', { defaultValue: '智能推荐方案' }),
+            description: t('features.furnitureSwap.description'),
             icon: furnitureSwapIcon,
             route: '/placement/input',
             color: 'from-amber-400 to-orange-500',
-            available: true // 已完成开发
+            available: true,
+            cta: t('features.furnitureSwap.cta')
         },
         {
             id: 3,
-            title: '全屋定制',
-            subtitle: '风格定制方案',
-            description: '上传硬装照片，AI 为您定制专属软装方案，从设计到购物清单一站搞定',
+            title: t('features.roomCustomization.title'),
+            subtitle: t('features.roomCustomization.subtitle', { defaultValue: '风格定制方案' }),
+            description: t('features.roomCustomization.description'),
             icon: wholeHomeIcon,
             route: '/room-customization/input',
             color: 'from-yellow-400 to-amber-500',
-            available: true // 已完成开发
+            available: true,
+            cta: t('features.roomCustomization.cta')
         }
     ];
 
@@ -47,7 +52,7 @@ const Home = () => {
         if (feature.available) {
             navigate(feature.route);
         } else {
-            alert('该功能正在开发中，敬请期待！');
+            alert(t('common:featureComingSoon', { defaultValue: '该功能正在开发中，敬请期待！' }));
         }
     };
 
@@ -68,12 +73,12 @@ const Home = () => {
                     {/* Hero Text */}
                     <div className="max-w-2xl mx-auto text-center mt-12 mb-16">
                         <h1 className="font-serif text-5xl sm:text-6xl font-bold text-gray-900 leading-tight mb-6">
-                            让家，更懂你
+                            {t('welcome')}
                         </h1>
                         <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-xl mx-auto">
-                            AI 驱动的智能家居设计平台
+                            {t('subtitle')}
                             <br />
-                            <span className="text-[#FF8C00] font-medium">从评估到定制，一站式打造理想空间</span>
+                            <span className="text-[#FF8C00] font-medium">{t('description')}</span>
                         </p>
                     </div>
 
@@ -99,71 +104,71 @@ const Home = () => {
                                     opacity-0 group-hover:opacity-10 transition-opacity duration-500
                                 `}></div>
 
-                                {/* Coming Soon Badge */}
-                                {!feature.available && (
-                                    <div className="absolute top-4 right-4 z-20">
-                                        <span className="inline-block px-3 py-1 text-xs font-semibold text-white bg-gray-400 rounded-full">
-                                            开发中
-                                        </span>
-                                    </div>
-                                )}
-
                                 {/* Card Content */}
-                                <div className="relative z-10 p-8">
+                                <div className="relative p-8">
                                     {/* Icon */}
                                     <div className="mb-6 flex justify-center">
-                                        <div className="w-32 h-32 flex items-center justify-center transform group-hover:scale-110 transition-transform duration-500">
+                                        <div className="relative">
+                                            <div className={`
+                                                absolute inset-0 bg-gradient-to-br ${feature.color} 
+                                                rounded-full blur-xl opacity-30 group-hover:opacity-50 
+                                                transition-opacity duration-500
+                                            `}></div>
                                             <img
                                                 src={feature.icon}
                                                 alt={feature.title}
-                                                className="w-full h-full object-contain"
+                                                className="relative w-20 h-20 object-contain transform group-hover:scale-110 transition-transform duration-500"
                                             />
                                         </div>
                                     </div>
 
                                     {/* Text Content */}
                                     <div className="text-center">
-                                        <h3 className="font-serif text-2xl font-bold text-gray-900 mb-2">
+                                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
                                             {feature.title}
                                         </h3>
-                                        <p className="text-sm font-medium text-[#FF8C00] mb-4">
+                                        <p className="text-sm text-gray-500 mb-3 font-medium">
                                             {feature.subtitle}
                                         </p>
-                                        <p className="text-sm text-gray-600 leading-relaxed">
+                                        <p className="text-gray-600 leading-relaxed mb-6 min-h-[60px]">
                                             {feature.description}
                                         </p>
-                                    </div>
 
-                                    {/* CTA Arrow */}
-                                    {feature.available && (
-                                        <div className="mt-6 flex justify-center">
-                                            <div className="flex items-center text-[#FF8C00] font-medium text-sm group-hover:translate-x-2 transition-transform duration-300">
-                                                开始体验
-                                                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    )}
+                                        {/* CTA Button */}
+                                        <button
+                                            className={`
+                                                w-full py-3 px-6 rounded-xl font-semibold text-white
+                                                bg-gradient-to-r ${feature.color}
+                                                transform group-hover:scale-105 transition-all duration-300
+                                                shadow-md group-hover:shadow-xl
+                                                ${!feature.available && 'opacity-50 cursor-not-allowed'}
+                                            `}
+                                            disabled={!feature.available}
+                                        >
+                                            {feature.cta}
+                                        </button>
+                                    </div>
                                 </div>
+
+                                {/* Coming Soon Badge */}
+                                {!feature.available && (
+                                    <div className="absolute top-4 right-4 bg-gray-900 text-white text-xs px-3 py-1 rounded-full">
+                                        {t('common:comingSoon', { defaultValue: '即将推出' })}
+                                    </div>
+                                )}
                             </div>
                         ))}
-                    </div>
-
-                    {/* Bottom Section */}
-                    <div className="max-w-3xl mx-auto text-center mt-20 mb-8 px-4">
-                        <div className="inline-block px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full shadow-md">
-                            <p className="text-sm text-gray-600">
-                                <span className="font-semibold text-gray-900">20-45 岁</span> 追求生活美学的您
-                                <span className="mx-2">•</span>
-                                <span className="text-[#FF8C00] font-medium">专业 AI 设计助手</span>
-                            </p>
-                        </div>
                     </div>
                 </div>
             </div>
 
-            {/* Inline Animation Styles */}
+            {/* Footer */}
+            <footer className="relative z-10 py-8 text-center text-gray-500 text-sm">
+                <p>{t('footer.copyright')}</p>
+                <p className="mt-2">{t('footer.madeWith')}</p>
+            </footer>
+
+            {/* Animations */}
             <style jsx>{`
                 @keyframes fadeInUp {
                     from {

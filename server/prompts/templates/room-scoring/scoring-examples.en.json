@@ -1,0 +1,149 @@
+{
+    "examples": [
+        {
+            "id": "scoring_perfect_minimalist",
+            "category": "High Score Room - Modern Minimalist",
+            "score_range": "85-95",
+            "input": {
+                "room_type": "Living Room",
+                "style": "Modern Minimalist",
+                "condition": "Clean, strong design sense"
+            },
+            "output": {
+                "narrative_opening": "Sunlight streams through the floor-to-ceiling windows onto the light wood floor—this space is literally textbook-level 'minimalism goals'. Clean lines, restrained colors, and that perfect negative space—nailed it, this is what dream living looks like.",
+                "total_score": 88,
+                "scores": {
+                    "Functional_Score": 90,
+                    "Aesthetics_Score": 92,
+                    "Lighting_Score": 88,
+                    "Overall_Design_Score": 82
+                },
+                "inherent_style": "Minimalist/Scandinavian",
+                "summary_text": "Well-planned layout, great natural light, cohesive style—already excellent!",
+                "improvement_suggestions": [
+                    "Consider adding a floor lamp next to the sofa for evening ambiance lighting (cherry on top)",
+                    "Try adding 1-2 art pieces or plants to enrich visual layers",
+                    "Throw pillows or a rug could add some color accents, making the space feel warmer"
+                ],
+                "key_suggestion_category": "Decoration"
+            }
+        },
+        {
+            "id": "scoring_cozy_messy",
+            "category": "Medium Score - Cozy but Slightly Cluttered",
+            "score_range": "60-75",
+            "input": {
+                "room_type": "Bedroom",
+                "style": "Cozy Home",
+                "condition": "Lived-in feel, slightly crowded"
+            },
+            "output": {
+                "narrative_opening": "This space has that lived-in warmth—photos on the wall, plants on the desk, and those 'temporarily' stacked Amazon boxes and clothes in the corner. I get it, we've all been there. Life is basically a cycle between 'just organized' and 'messy again' (lol).",
+                "total_score": 68,
+                "scores": {
+                    "Functional_Score": 72,
+                    "Aesthetics_Score": 65,
+                    "Lighting_Score": 70,
+                    "Overall_Design_Score": 65
+                },
+                "inherent_style": "Cozy/Contemporary",
+                "summary_text": "Warm space with lived-in vibes, but storage is a bit lacking—a little tidying would help.",
+                "improvement_suggestions": [
+                    "Start with the easiest: find a home for those 'temporarily' stacked items (storage bins are your friend)",
+                    "Add a bedside reading lamp for better task lighting—more comfy for nighttime reading",
+                    "Consider adding a small storage shelf to hide the clutter (out of sight, out of mind)",
+                    "Swap in warm-toned curtains to boost the cozy factor"
+                ],
+                "key_suggestion_category": "Storage"
+            }
+        },
+        {
+            "id": "scoring_chaotic_student",
+            "category": "Low Score Room - Cluttered Needs Organizing",
+            "score_range": "45-60",
+            "input": {
+                "room_type": "Study/Bedroom",
+                "style": "Student Dorm Vibes",
+                "condition": "Messy, items piled up"
+            },
+            "output": {
+                "narrative_opening": "Okay so... this space is hosting an 'item battle royale'—clothes, books, snack bags all fighting for territory. The desk has evolved into a 'museum of random stuff', and the chair is now a temporary clothing rack. But hey, this just means you're living your best 'maximalist life' (just kidding).",
+                "total_score": 52,
+                "scores": {
+                    "Functional_Score": 55,
+                    "Aesthetics_Score": 45,
+                    "Lighting_Score": 58,
+                    "Overall_Design_Score": 50
+                },
+                "inherent_style": "Chaotic/Eclectic",
+                "summary_text": "Functionality is okay, but desperately needs storage and organizing—time for a 'declutter battle'.",
+                "improvement_suggestions": [
+                    "Step one: Launch a 'declutter battle' and clear out stuff you don't need (instant impact change)",
+                    "Add multi-tier shelves or storage boxes, give everything a permanent home (anxiety-free storage solution)",
+                    "Try the 'one week method': organize just one small area each day, won't be too exhausting",
+                    "Add a desk lamp to improve study area lighting (protect those eyes!)"
+                ],
+                "key_suggestion_category": "Decluttering"
+            }
+        },
+        {
+            "id": "scoring_disaster_zone",
+            "category": "Very Low Score Room - Disaster Zone",
+            "score_range": "30-45",
+            "input": {
+                "room_type": "Bedroom",
+                "style": "Chaotic Chic",
+                "condition": "Severely messy, needs major overhaul"
+            },
+            "output": {
+                "narrative_opening": "Holy moly, this space just unlocked the 'chaotic chic' achievement! Mount Laundry, the Sea of Stuff, and those mysterious corners that time forgot... This isn't mess, it's 'extreme challenge: finding things' (kidding). Friend, it's time for a revolutionary makeover!",
+                "total_score": 38,
+                "scores": {
+                    "Functional_Score": 40,
+                    "Aesthetics_Score": 30,
+                    "Lighting_Score": 45,
+                    "Overall_Design_Score": 35
+                },
+                "inherent_style": "Chaotic/Needs Major Overhaul",
+                "summary_text": "Space urgently needs comprehensive organizing and makeover, but don't worry—let's tackle this together!",
+                "improvement_suggestions": [
+                    "Deep breath, let's do this: Start by bagging up obvious trash and unwanted items (this is the most important first step)",
+                    "Suggest zone-based organizing: bedroom area today, desk area tomorrow—can't eat an elephant in one bite",
+                    "Invest in some large storage bins, 'hide' the clutter first, then sort slowly (lazy-friendly makeover)",
+                    "Consider hiring a cleaning service for one deep clean session, give yourself a fresh start",
+                    "After organizing, try the 'one in, one out' rule: buy something new, toss something old"
+                ],
+                "key_suggestion_category": "Decluttering"
+            }
+        },
+        {
+            "id": "scoring_industrial_loft",
+            "category": "Medium-High Score Room - Industrial Style",
+            "score_range": "70-80",
+            "input": {
+                "room_type": "Studio",
+                "style": "Industrial",
+                "condition": "Distinct style, lighting a bit dark"
+            },
+            "output": {
+                "narrative_opening": "Exposed brick walls and metal fixtures create this raw aesthetic, with light and shadow dancing on the concrete floor—this is a creator's freedom space. Industrial vibes are totally nailed, just the lighting is a bit too 'moody' (lol).",
+                "total_score": 73,
+                "scores": {
+                    "Functional_Score": 75,
+                    "Aesthetics_Score": 80,
+                    "Lighting_Score": 60,
+                    "Overall_Design_Score": 77
+                },
+                "inherent_style": "Industrial/Loft",
+                "summary_text": "Distinct industrial style with personality, but insufficient lighting affects usability—suggest adding task lighting.",
+                "improvement_suggestions": [
+                    "Add a desk lamp or track lighting to improve work area illumination (protect your eyes, boost productivity)",
+                    "Use plants to soften the industrial edge, add some life",
+                    "Try adding warm-toned decor (like wooden accessories) to balance the cold industrial feel",
+                    "Optimize cable management for a cleaner look (industrial style needs attention to detail too)"
+                ],
+                "key_suggestion_category": "Lighting"
+            }
+        }
+    ]
+}

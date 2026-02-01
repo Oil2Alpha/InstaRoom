@@ -7,20 +7,22 @@ const ai = new GoogleGenAI({});
  * 基于评分优化点生成梦中情家
  * @param {object} photo - 原始照片对象 {filepath, mimetype}
  * @param {object} scoreData - 评分数据
+ * @param {string} language - 语言参数 ('en' 或 'zh')
  * @returns {object} { renderedImage, shoppingList }
  */
-async function generateDreamHome(photo, scoreData) {
+async function generateDreamHome(photo, scoreData, language = 'en') {
     try {
         console.log('\n=== 开始生成梦中情家 ===');
         console.log('评分:', scoreData.score);
         console.log('优化建议数量:', scoreData.suggestions?.length || 0);
+        console.log('语言:', language);
 
-        // 步骤1：分析优化点并生成改造描述
-        const improvementPrompt = await generateImprovementPrompt(scoreData);
+        // 步骤1：分析优化点并生成改造描述（传入语言参数）
+        const improvementPrompt = await generateImprovementPrompt(scoreData, language);
         console.log('改造描述生成完成');
 
-        // 步骤2：生成购物清单
-        const shoppingList = await generateShoppingList(scoreData);
+        // 步骤2：生成购物清单（传入语言参数）
+        const shoppingList = await generateShoppingList(scoreData, language);
         console.log('购物清单生成完成，商品数量:', shoppingList.length);
 
         // 步骤3：生成渲染图
@@ -41,22 +43,23 @@ async function generateDreamHome(photo, scoreData) {
 /**
  * 生成改造描述 prompt（使用新 Prompt 系统）
  */
-async function generateImprovementPrompt(scoreData) {
+async function generateImprovementPrompt(scoreData, language = 'en') {
     const { DreamHomeBuilder } = require('../prompts');
 
-    const builder = DreamHomeBuilder.createImprovementBuilder();
+    const builder = DreamHomeBuilder.createImprovementBuilder(language);
+    await builder.loadTemplate();
     const prompt = await builder
         .setScoreData(scoreData)
         .build();
 
-    console.log('使用新 Prompt 系统生成改造指令');
+    console.log(`使用新 Prompt 系统生成改造指令 (语言: ${language})`);
     return prompt;
 }
 
 /**
  * 生成购物清单（使用新 Prompt 系统）
  */
-async function generateShoppingList(scoreData) {
+async function generateShoppingList(scoreData, language = 'en') {
     try {
         const { suggestions } = scoreData;
 
@@ -66,13 +69,14 @@ async function generateShoppingList(scoreData) {
 
         const { DreamHomeBuilder } = require('../prompts');
 
-        const builder = DreamHomeBuilder.createShoppingListBuilder();
+        const builder = DreamHomeBuilder.createShoppingListBuilder(language);
+        await builder.loadTemplate();
         const prompt = await builder
             .setSuggestions(suggestions)
             .addRelevantExamples(suggestions, 2)
             .build();
 
-        console.log('使用新 Prompt 系统生成购物清单 Prompt');
+        console.log(`使用新 Prompt 系统生成购物清单 Prompt (语言: ${language})`);
 
         const response = await ai.models.generateContent({
             model: 'gemini-3-flash-preview',

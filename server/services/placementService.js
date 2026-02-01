@@ -10,20 +10,22 @@ const { generatePlacementPrompt } = require('../config/prompts');
  * @param {object} params.environment - 环境分析结果
  * @param {object} params.preferences - 用户偏好
  * @param {object} params.photo - 原始照片（用于图像编辑）
+ * @param {string} params.language - 语言 ('en' 或 'zh')
  * @returns {object} 包含 2 套方案的 JSON
  */
-async function generatePlacementOptions({ furnitureInfo, dimensions, environment, preferences, photo }) {
+async function generatePlacementOptions({ furnitureInfo, dimensions, environment, preferences, photo, language = 'en' }) {
     try {
         // 构建 prompt 输入
         const promptInput = {
             furnitureInfo,
             dimensions,
             environment,
-            preferences
+            preferences,
+            language
         };
 
-        // 生成 prompt（传递完整的参数对象）
-        const prompt = generatePlacementPrompt(promptInput);
+        // 生成 prompt（传递完整的参数对象，包含语言）
+        const prompt = await generatePlacementPrompt(promptInput);
 
         console.log('Generating placement options with Gemini...');
 

@@ -1,0 +1,115 @@
+<prompt>
+  <role>Professional Interior Designer</role>
+  
+  <task>
+    <objective>Based on room environment analysis, design 2 furniture replacement options for the user</objective>
+    <output_format>JSON</output_format>
+  </task>
+  
+  <input_information>
+    <room_environment>
+      <style>{{inherent_style}}</style>
+      <color_material>{{dominant_color_material}}</color_material>
+      <light_direction>{{light_source_direction}}</light_direction>
+      <shadow_intensity>{{shadow_intensity}}</shadow_intensity>
+    </room_environment>
+    
+    <furniture_to_replace>
+      <name>{{furniture_name}}</name>
+      <description>{{furniture_description}}</description>
+      <dimensions>L {{length_cm}}cm × W {{width_cm}}cm × H {{height_cm}}cm</dimensions>
+    </furniture_to_replace>
+    
+    <user_preferences>
+{{preferences}}
+    </user_preferences>
+  </input_information>
+  
+  <task_requirements>
+    <requirement priority="highest">
+      Generate 2 different style furniture replacement options:
+      - Option 1: Optimized upgrade based on existing style (Conservative option)
+      - Option 2: Bold style transformation (Innovative option)
+    </requirement>
+    
+    <requirement priority="high">
+      **Important**: Each option should only provide replacement suggestions for the user-specified furniture ({{furniture_name}})
+      - Do not recommend additional furniture
+      - Only generate different style replacement options for this single piece of furniture
+    </requirement>
+    
+    <requirement priority="high">
+      Furniture replacement requirements:
+      - name: Keep consistent with user-specified furniture name ({{furniture_name}})
+      - estimatedDimensions: Estimate reasonable dimensions (unit: cm), slight adjustments allowed but not too different
+      - styleKeywords: 3-5 precise style keywords
+      - materialTags: 2-3 specific material tags (e.g., ["Knitted Fabric", "Solid Wood", "Metal"])
+      - position: Location in the room
+    </requirement>
+    
+    <requirement priority="medium">
+      **Effect rendering description (imagePrompt)**:
+      - Write detailed image generation prompt for each option
+      - **Key requirement**: This is an image editing task, not regenerating an image
+      - Describe how to replace only the user-annotated furniture area based on the original photo
+      - **Required instructions** (in order):
+        * "Keep the original room's overall layout, walls, floor, and other furniture completely unchanged"
+        * "**Step 1**: Remove and eliminate the original {{furniture_name}} within the annotated area, restoring that area to clean background (wall/floor)"
+        * "**Step 2**: Precisely place the new {{furniture_name}} at the original furniture location"
+        * "Detailed description of new furniture: style, color, material, dimensions (should be similar to original)"
+        * "Ensure the new furniture's lighting, shadows, and perspective are fully consistent with the original image environment"
+        * "Appropriately remove surrounding clutter while maintaining the room's authenticity and lived-in feel"
+      - Length: 150-200 words
+    </requirement>
+  </task_requirements>
+  
+  <special_tags_translation>
+    Users may have selected special preference tags that need to be translated into specific, e-commerce searchable tags:
+    
+    - "Child-friendly" → ["Rounded corners", "Eco-friendly fabric", "Stable structure", "No sharp edges", "Easy to clean"]
+    - "Female-friendly" → ["Lightweight", "Easy to move", "Soft tones", "Refined design"]
+    - "Durable" → ["Solid wood", "Metal frame", "High-density foam", "Wear-resistant fabric"]
+    - "Easy to clean" → ["Waterproof fabric", "Removable and washable", "Smooth surface", "Stain-resistant coating"]
+    - "Low carbon" → ["Recyclable materials", "Locally produced", "Natural materials", "Energy-efficient"]
+    
+    Integrate translated tags into materialTags and styleKeywords.
+  </special_tags_translation>
+  
+  <examples>
+{{examples}}
+  </examples>
+  
+  <output_schema>
+    {
+      "options": [
+        {
+          "id": 1,
+          "name": "Option name (concise and attractive)",
+          "description": "Option description (30-50 words, explaining the design concept of this replacement)",
+          "imagePrompt": "In this room photo, keep the walls, floor, and all other furniture completely unchanged. Step 1: Remove and completely eliminate the original {{furniture_name}} in the annotated area, restoring that area to clean background. Step 2: Precisely place a new [detailed description of new furniture's style, color, material, dimensions] at the original {{furniture_name}} location, ensuring lighting and shadows are fully consistent with the room environment.",
+          "furnitureList": [
+            {
+              "name": "{{furniture_name}}",
+              "estimatedDimensions": {"length": 200, "width": 90, "height": 80},
+              "styleKeywords": ["Modern", "Beige", "Fabric"],
+              "materialTags": ["Knitted Fabric", "Solid Wood"],
+              "position": "Center of living room"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Option name (clearly different style from Option 1)",
+          "description": "Option description (30-50 words)",
+          "imagePrompt": "...",
+          "furnitureList": [...]
+        }
+      ]
+    }
+  </output_schema>
+  
+  <constraints>
+    <constraint>Response must contain only one JSON object</constraint>
+    <constraint>No other text, explanations, or Markdown markup allowed</constraint>
+  </constraints>
+</prompt>

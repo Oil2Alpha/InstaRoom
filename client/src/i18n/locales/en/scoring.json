@@ -1,0 +1,52 @@
+{
+    "title": "Room Scoring",
+    "uploadTitle": "Understand Your Home's Aesthetic",
+    "uploadDescription": "Upload a room photo, and our AI-powered professional designer will provide in-depth analysis from functionality, aesthetics, and lighting perspectives.",
+    "analyzing": "Analyzing your room...",
+    "focusArea": "Focus Area (Optional)",
+    "focusAreaPlaceholder": "e.g., Storage space, Lighting design",
+    "uploadPhotoLabel": "Take/Upload Room Photo",
+    "photoSelected": "Selected",
+    "photoHint": "Only JPG, PNG supported. Ensure good lighting.",
+    "startAnalysis": "Start AI Analysis",
+    "networkError": "Network error, please try again later",
+    "results": {
+        "title": "Room Analysis Results",
+        "totalScore": "Total Score",
+        "aiSmartScore": "AI Smart Score",
+        "narrative": "First Impression of Your Room",
+        "yourSpace": "Your Space",
+        "dimensions": {
+            "title": "Detailed Score Analysis",
+            "functional": "Functionality",
+            "aesthetics": "Aesthetics",
+            "lighting": "Lighting Ambiance",
+            "overall": "Overall Design"
+        },
+        "style": "Style Recognition",
+        "summary": "Summary",
+        "suggestions": {
+            "title": "Professional Improvement Suggestions",
+            "category": "Priority Area"
+        },
+        "actions": {
+            "generateDreamHome": "✨ Generate Dream Home",
+            "generating": "Generating...",
+            "startPlacement": "Start Furniture Replacement →",
+            "shareReport": "Share Report",
+            "sharing": "Generating..."
+        },
+        "loading": "Loading score results...",
+        "backToHome": "Back to Home",
+        "dataLost": "Score data not found, please re-upload photo.",
+        "parseError": "Data parsing error, please re-upload photo.",
+        "dataError": "Scoring data format error, please try again",
+        "storageError": "Data storage failed, please check browser settings",
+        "missingData": "Missing required data, please rescore",
+        "generationFailed": "Generation failed:",
+        "shareGenerated": "✅ Score report has been saved to your device!",
+        "shareGenerateFailed": "Failed to generate share image",
+        "shareImageFailed": "Failed to generate image, please retry",
+        "dataTooLarge": "Data too large, trying alternative method..."
+    }
+}

@@ -3,11 +3,31 @@
 
 const { SCORE_DIMENSIONS } = require('./constants');
 const { REFERENCE_OBJECTS } = require('./constants');
+const RoomScoringBuilder = require('../prompts/builders/RoomScoringBuilder');
+
 const dimensionsList = SCORE_DIMENSIONS.map(dim =>
   ` - ${dim}`
 ).join('\n');
 
-const generateScoringPrompt = (focusArea = null) => {
+const generateScoringPrompt = async (focusArea = null, language = 'en') => {
+  // 使用 Builder 构建多语言 Prompt
+  const builder = new RoomScoringBuilder(language);
+
+  // 先加载模板和示例
+  await builder.loadTemplate();
+
+  if (focusArea) {
+    builder.setFocusArea(focusArea);
+  }
+
+  // 添加 2 个示例
+  builder.addExamples(builder.allExamples.slice(0, 2));
+
+  return await builder.build();
+};
+
+// 保留原始中文版本作为备用（向后兼容）
+const generateScoringPromptLegacy = (focusArea = null) => {
 
   // 确保 JSON 模板结构正确
   const jsonTemplate = `{
@@ -167,26 +187,66 @@ const generateEnvironmentPrompt = (roomType = '房间') => {
  * @param {object} params.dimensions - 测量的尺寸
  * @param {object} params.environment - 环境分析结果
  * @param {object} params.preferences - 用户偏好
+ * @param {string} params.language - 语言 ('en' 或 'zh')
  */
-const generatePlacementPrompt = ({ furnitureInfo, dimensions, environment, preferences }) => {
-  // 构建用户偏好描述
+const generatePlacementPrompt = async ({ furnitureInfo, dimensions, environment, preferences, language = 'en' }) => {
+  const PlacementBuilder = require('../prompts/builders/PlacementBuilder');
+
+  try {
+    const prompt = await PlacementBuilder.createPlacementBuilder(language)
+      .setEnvironment(environment)
+      .setFurniture(furnitureInfo, dimensions)
+      .setPreferences(preferences)
+      .addRelevantExamples(furnitureInfo.name, 1)
+      .build();
+
+    return prompt;
+  } catch (error) {
+    console.error('Error building placement prompt with PlacementBuilder:', error);
+    // Fallback to inline prompt if builder fails
+    return buildFallbackPlacementPrompt({ furnitureInfo, dimensions, environment, preferences, language });
+  }
+};
+
+/**
+ * Fallback prompt builder for placement
+ */
+const buildFallbackPlacementPrompt = ({ furnitureInfo, dimensions, environment, preferences, language }) => {
+  const isZh = language === 'zh';
+
   let preferencesText = '';
   if (preferences) {
-    if (preferences.stylePreference && preferences.stylePreference.length > 0) {
-      preferencesText += `\n- 风格偏好：${preferences.stylePreference.join('、')}`;
-    }
-    if (preferences.preferUsed) {
-      preferencesText += `\n- 优先推荐二手家具`;
-    }
-    if (preferences.featureTags && preferences.featureTags.length > 0) {
-      preferencesText += `\n- 特殊需求标签：${preferences.featureTags.join('、')}`;
-    }
-    if (preferences.budgetRange) {
-      preferencesText += `\n- 预算范围：${preferences.budgetRange.min}-${preferences.budgetRange.max}元`;
+    if (isZh) {
+      if (preferences.stylePreference && preferences.stylePreference.length > 0) {
+        preferencesText += `\n- 风格偏好：${preferences.stylePreference.join('、')}`;
+      }
+      if (preferences.preferUsed) {
+        preferencesText += `\n- 优先推荐二手家具`;
+      }
+      if (preferences.featureTags && preferences.featureTags.length > 0) {
+        preferencesText += `\n- 特殊需求标签：${preferences.featureTags.join('、')}`;
+      }
+      if (preferences.budgetRange) {
+        preferencesText += `\n- 预算范围：${preferences.budgetRange.min}-${preferences.budgetRange.max}元`;
+      }
+    } else {
+      if (preferences.stylePreference && preferences.stylePreference.length > 0) {
+        preferencesText += `\n- Style preference: ${preferences.stylePreference.join(', ')}`;
+      }
+      if (preferences.preferUsed) {
+        preferencesText += `\n- Prefer second-hand furniture`;
+      }
+      if (preferences.featureTags && preferences.featureTags.length > 0) {
+        preferencesText += `\n- Special requirements: ${preferences.featureTags.join(', ')}`;
+      }
+      if (preferences.budgetRange) {
+        preferencesText += `\n- Budget range: ${preferences.budgetRange.min}-${preferences.budgetRange.max} CNY`;
+      }
     }
   }
 
-  const prompt = `
+  if (isZh) {
+    return `
 你是一名专业的室内设计师。基于用户房间的环境分析，为用户设计 2 套家具置换方案。
 
 --- 输入信息 ---
@@ -204,89 +264,36 @@ ${preferencesText}
 
 --- 任务要求 ---
 1. 生成 2 套不同风格的家具置换方案
-   - 方案 1：基于现有风格的优化升级（保守方案）
-   - 方案 2：大胆的风格转变（创新方案）
+2. 每套方案只针对 ${furnitureInfo.name} 提供替换建议
+3. 包含 imagePrompt 用于图像编辑
 
-2. **重要**：每套方案只需要为用户指定的家具（${furnitureInfo.name}）提供替换建议
-   - 不要推荐其他额外的家具
-   - 只针对这一件家具生成不同风格的替换选项
+--- 输出 JSON ---
+`.trim();
+  } else {
+    return `
+You are a professional interior designer. Based on the room environment analysis, design 2 furniture replacement options for the user.
 
-3. 家具替换建议要求：
-   - name: 保持与用户指定的家具名称一致（${furnitureInfo.name}）
-   - estimatedDimensions: 估算合理的尺寸（单位：cm），可以略有调整但不要差异太大
-   - styleKeywords: 3-5 个精准的风格关键词
-   - materialTags: 2-3 个具体的材质标签（如["针织面料", "原木", "金属"]）
-   - position: 在房间中的位置（可参考用户描述）
+--- Input Information ---
+**Room Environment**:
+- Room style: ${environment.inherent_style}
+- Dominant color/material: ${environment.dominant_color_material}
+- Light direction: ${environment.light_source_direction}
+- Shadow intensity: ${environment.shadow_intensity}
 
+**Furniture to Replace**:
+- Furniture name: ${furnitureInfo.name}
+- Description: ${furnitureInfo.description || 'None'}
+- Dimensions: L ${dimensions.length_cm}cm × W ${dimensions.width_cm}cm × H ${dimensions.height_cm}cm
+${preferencesText}
 
+--- Task Requirements ---
+1. Generate 2 different style furniture replacement options
+2. Each option should only provide replacement suggestions for ${furnitureInfo.name}
+3. Include imagePrompt for image editing
 
-4. **效果图生成描述（imagePrompt）**：
-   - 为每套方案编写详细的图像生成 prompt
-   - **关键要求**：这是一个图像编辑任务，不是重新生成图像
-   - 描述如何在原始照片的基础上，只替换用户标注的家具区域
-   - **必须包含的指令**（按顺序）：
-     * "保持原始房间的整体布局、墙面、地板、其他家具完全不变"
-     * "**第一步**：移除并消除标注区域内的原有 ${furnitureInfo.name}，使该区域恢复为干净的背景（墙面/地板）"
-     * "**第二步**：在原家具所在的位置，精确放置新的 ${furnitureInfo.name}"
-     * "新家具的详细描述：风格、颜色、材质、尺寸（应与原家具相近）"
-     * "确保新家具的光照、阴影、透视与原图环境完全一致"
-     * "适当消除周围杂物，但保持房间的真实感和生活气息"
-   - 长度：150-200 字
-   - 示例格式："在这张房间照片中，保持墙面、地板和其他所有家具完全不变。第一步，移除并消除中央位置的旧沙发，使该区域恢复为干净的地板和墙面。第二步，在原沙发的位置精确放置一款现代简约风格的米色布艺沙发（200×90×80cm），确保光照和阴影与房间环境一致..."
-
-5. **特殊标签翻译**：
-   用户可能选择了特殊偏好标签（如"儿童友好"、"女性友好"、"耐用"、"易清洁"、"低碳"）。
-   你需要将这些抽象标签翻译成具体的、电商可搜索的标签：
-   
-   示例翻译：
-   - "儿童友好" → ["圆角设计", "环保面料", "稳固结构", "无尖锐边角", "易清洁"]
-   - "女性友好" → ["轻便", "易移动", "柔和色调", "精致设计"]
-   - "耐用" → ["实木", "金属框架", "高密度海绵", "耐磨面料"]
-   - "易清洁" → ["防水面料", "可拆洗", "光滑表面", "防污涂层"]
-   - "低碳" → ["可回收材料", "本地生产", "天然材质", "节能"]
-   
-   将翻译后的标签整合到 materialTags 和 styleKeywords 中。
-
---- 严格输出要求 ---
-你的响应 **必须只包含** 一个 JSON 对象。
-**禁止输出任何其他文字、解释、Markdown 标记。**
-
-{
-  "options": [
-    {
-      "id": 1,
-      "name": "方案名称（简洁有吸引力）",
-      "description": "方案描述（30-50字，说明这个替换方案的设计理念）",
-      "imagePrompt": "在这张房间照片中，保持墙面、地板和其他所有家具完全不变。第一步：移除并完全消除标注区域内的原有${furnitureInfo.name}，使该区域恢复为干净的背景。第二步：在原${furnitureInfo.name}的位置精确放置新的[具体描述新家具的风格、颜色、材质、尺寸]，确保光照、阴影与房间环境完全一致。",
-      "furnitureList": [
-        {
-          "name": "${furnitureInfo.name}",
-          "estimatedDimensions": {"length": 200, "width": 90, "height": 80},
-          "styleKeywords": ["现代", "米色", "布艺"],
-          "materialTags": ["针织面料", "原木"],
-          "position": "客厅中央"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "name": "方案名称（与方案1风格明显不同）",
-      "description": "方案描述（30-50字）",
-      "imagePrompt": "在这张房间照片中，保持墙面、地板和其他所有家具完全不变。第一步：移除并完全消除标注区域内的原有${furnitureInfo.name}，使该区域恢复为干净的背景。第二步：在原${furnitureInfo.name}的位置精确放置新的[具体描述新家具的风格、颜色、材质、尺寸]，确保光照、阴影与房间环境完全一致。",
-      "furnitureList": [
-        {
-          "name": "${furnitureInfo.name}",
-          "estimatedDimensions": {"length": 205, "width": 92, "height": 82},
-          "styleKeywords": ["轻奢", "灰色", "真皮"],
-          "materialTags": ["真皮", "金属"],
-          "position": "客厅中央"
-        }
-      ]
-    }
-  ]
-}
-  `.trim();
-  return prompt;
+--- Output JSON ---
+`.trim();
+  }
 };
 
 module.exports = {

@@ -1,0 +1,71 @@
+{
+    "examples": [
+        {
+            "id": "placement_sofa_modern",
+            "category": "sofa",
+            "input": {
+                "furniture_name": "Sofa",
+                "room_style": "Modern Minimalist",
+                "dimensions": "200×90×80cm"
+            },
+            "output": {
+                "options": [
+                    {
+                        "id": 1,
+                        "name": "Modern Minimalist Upgrade",
+                        "description": "Maintaining minimalist style, selecting a beige fabric sofa with smoother lines, enhancing overall texture",
+                        "imagePrompt": "In this room photo, keep the walls, floor, and all other furniture completely unchanged. Step 1: Remove and completely eliminate the old sofa in the center position, restoring that area to clean floor and wall. Step 2: Precisely place a modern minimalist beige fabric sofa (200×90×80cm) at the original sofa location, featuring knitted fabric and solid wood legs, with smooth and clean lines, ensuring lighting and shadows are consistent with the room environment.",
+                        "furnitureList": [
+                            {
+                                "name": "Sofa",
+                                "estimatedDimensions": {
+                                    "length": 200,
+                                    "width": 90,
+                                    "height": 80
+                                },
+                                "styleKeywords": [
+                                    "Modern",
+                                    "Beige",
+                                    "Fabric",
+                                    "Minimalist"
+                                ],
+                                "materialTags": [
+                                    "Knitted Fabric",
+                                    "Solid Wood"
+                                ],
+                                "position": "Center of living room"
+                            }
+                        ]
+                    },
+                    {
+                        "id": 2,
+                        "name": "Luxury Style Transformation",
+                        "description": "Bold attempt at luxury style, gray leather sofa with metal legs, elevating the space's sophistication",
+                        "imagePrompt": "In this room photo, keep the walls, floor, and all other furniture completely unchanged. Step 1: Remove and completely eliminate the old sofa in the center position, restoring that area to clean floor and wall. Step 2: Precisely place a luxury-style gray leather sofa (205×92×82cm) at the original sofa location, featuring genuine leather and metal legs with elegant lines, ensuring lighting and shadows are consistent with the room environment.",
+                        "furnitureList": [
+                            {
+                                "name": "Sofa",
+                                "estimatedDimensions": {
+                                    "length": 205,
+                                    "width": 92,
+                                    "height": 82
+                                },
+                                "styleKeywords": [
+                                    "Luxury",
+                                    "Gray",
+                                    "Leather",
+                                    "Metal"
+                                ],
+                                "materialTags": [
+                                    "Genuine Leather",
+                                    "Metal"
+                                ],
+                                "position": "Center of living room"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

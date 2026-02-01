@@ -1,0 +1,31 @@
+{
+    "welcome": "让家，更懂你",
+    "subtitle": "AI 驱动的智能家居设计平台",
+    "description": "从评估到定制，一站式打造理想空间",
+    "analyze": "智能评估",
+    "features": {
+        "title": "我们的功能",
+        "roomScoring": {
+            "title": "房间评分",
+            "subtitle": "智能推荐",
+            "description": "专业设计师视角，从功能、美学、照明等维度深度分析您的空间",
+            "cta": "开始体验"
+        },
+        "furnitureSwap": {
+            "title": "家具置换",
+            "subtitle": "智能推荐方案",
+            "description": "精准尺寸计算，风格匹配，为您推荐最适合的家具替换方案",
+            "cta": "开始体验"
+        },
+        "roomCustomization": {
+            "title": "全屋定制",
+            "subtitle": "风格定制方案",
+            "description": "上传硬装照片，AI 为您定制专属软装方案，从设计到购物清单一站搞定",
+            "cta": "开始体验"
+        }
+    },
+    "footer": {
+        "copyright": "© 2026 InstaRoom. 保留所有权利。",
+        "madeWith": "为 Google Hackathon 用 ❤️ 制作"
+    }
+}

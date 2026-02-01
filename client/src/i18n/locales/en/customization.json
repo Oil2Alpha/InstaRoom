@@ -1,0 +1,101 @@
+{
+    "title": "Room Customization",
+    "subtitle": "Tell us about your room and preferences, AI creates your exclusive space",
+    "input": {
+        "title": "🏠 Room Style Customization",
+        "uploadPhoto": "📸 Upload Room Photo",
+        "uploadPhotoRequired": "Required",
+        "uploadHint": "Click to upload a photo of your room after hard decoration",
+        "roomInfo": {
+            "title": "🏡 Room Purpose",
+            "purpose": "Room Purpose",
+            "purposePlaceholder": "Select room purpose",
+            "occupants": "👥 Number of Occupants",
+            "occupantsPlaceholder": "e.g., 2"
+        },
+        "preferences": {
+            "title": "🎨 Style Preference",
+            "style": "Style Preference",
+            "styleHint": "(Select up to 3)",
+            "stylePlaceholder": "Select styles (up to 3)",
+            "features": "⭐ Special Requirements",
+            "featuresPlaceholder": "Select requirements",
+            "budget": "💰 Budget Range",
+            "budgetPlaceholder": "Select budget",
+            "preferUsed": "♻️ Accept Second-hand Furniture (More eco-friendly & economical)"
+        },
+        "submit": "✨ Generate Custom Design Plan",
+        "submitting": "Generating..."
+    },
+    "roomPurposes": {
+        "living": "Living Room",
+        "bedroom": "Bedroom",
+        "study": "Study",
+        "kids": "Kids Room",
+        "dining": "Dining Room",
+        "kitchen": "Kitchen"
+    },
+    "styles": {
+        "modern": "Modern Minimalist",
+        "nordic": "Scandinavian",
+        "industrial": "Industrial",
+        "chinese": "Chinese",
+        "japanese": "Japanese",
+        "american": "American"
+    },
+    "specialNeeds": {
+        "childFriendly": "Child-friendly",
+        "petFriendly": "Pet-friendly",
+        "easyClean": "Easy to Clean",
+        "storage": "Large Storage",
+        "homeOffice": "Home Office"
+    },
+    "budgets": {
+        "economy": "Economy (3000-5000)",
+        "standard": "Standard (5000-10000)",
+        "comfort": "Comfort (10000-20000)",
+        "luxury": "Luxury (20000+)"
+    },
+    "generating": "AI is creating your exclusive design plan...",
+    "alerts": {
+        "photoRequired": "Please upload a room photo",
+        "styleRequired": "Please select at least one style preference"
+    },
+    "backToHome": "Back to Home",
+    "results": {
+        "title": "Your Exclusive Custom Plan",
+        "backToCustomize": "Back to Customization",
+        "dataLost": "Data lost, please regenerate",
+        "parseError": "Data parsing failed",
+        "designPlan": {
+            "title": "Design Plan",
+            "concept": "Design Concept",
+            "features": "Key Features"
+        },
+        "comparison": {
+            "title": "Before & After Comparison",
+            "before": "Before",
+            "after": "After",
+            "originalPhoto": "Original Photo",
+            "aiCustomized": "AI Customized",
+            "renderFailed": "Render failed"
+        },
+        "shoppingList": {
+            "title": "Shopping List",
+            "totalBudget": "Total Budget",
+            "secondHand": "Second-hand",
+            "empty": "No shopping list available"
+        },
+        "roomAnalysis": {
+            "title": "Room Analysis",
+            "area": "Area",
+            "ceilingHeight": "Ceiling Height",
+            "naturalLight": "Natural Light",
+            "spaceFeeling": "Space Feeling"
+        },
+        "actions": {
+            "backToHome": "Back to Home",
+            "customize": "Customize Again"
+        }
+    }
+}
