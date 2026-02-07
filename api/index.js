@@ -1,14 +1,17 @@
-// Vercel Serverless Function - 将 Koa 应用适配为 Serverless
+// Vercel Serverless Function - API 入口
+const path = require('path');
+
+// 设置环境变量（Vercel 会自动注入）
+if (!process.env.GEMINI_API_KEY) {
+    require('dotenv').config({ path: path.join(__dirname, '../server/.env') });
+}
+
 const Koa = require('koa');
 const Router = require('koa-router');
 const { koaBody } = require('koa-body');
 const cors = require('@koa/cors');
-const path = require('path');
 
-// 加载环境变量
-require('dotenv').config({ path: path.join(__dirname, '../server/.env') });
-
-// 导入控制器
+// 导入控制器 - 使用相对路径
 const scoringController = require('../server/controllers/scoringController');
 const furnitureController = require('../server/controllers/furnitureController');
 const placementController = require('../server/controllers/placementController');
@@ -34,7 +37,8 @@ app.use(koaBody({
     formLimit: '50mb',
     formidable: {
         maxFileSize: 10 * 1024 * 1024,
-        keepExtensions: true
+        keepExtensions: true,
+        uploadDir: '/tmp'  // Vercel serverless 使用 /tmp
     }
 }));
 

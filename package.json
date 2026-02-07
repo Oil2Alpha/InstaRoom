@@ -2,23 +2,14 @@
     "name": "instaroom",
     "version": "1.0.0",
     "description": "AI-Powered Home Design Assistant - Google Gemini API Hackathon 2026",
+    "private": true,
     "scripts": {
         "dev": "cd client && npm run dev",
         "build": "cd client && npm run build",
-        "start": "cd server && node server.js",
-        "vercel-build": "cd client && npm install && npm run build"
-    },
-    "dependencies": {
-        "@google/genai": "^1.38.0",
-        "@google/generative-ai": "^0.24.1",
-        "@koa/cors": "^5.0.0",
-        "dotenv": "^17.2.3",
-        "koa": "^3.1.1",
-        "koa-body": "^7.0.1",
-        "koa-router": "^14.0.0"
+        "start": "cd server && node server.js"
     },
     "engines": {
-        "node": ">=18.0.0"
+        "node": "18.x"
     },
     "keywords": [
         "gemini",
