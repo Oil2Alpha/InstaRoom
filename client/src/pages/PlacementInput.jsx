@@ -6,8 +6,10 @@ import Logo from '../components/Logo';
 import LoadingOverlay from '../components/LoadingOverlay';
 import DimensionConfirmModal from '../components/DimensionConfirmModal';
 
-const API_MEASURE_ENDPOINT = 'http://localhost:3000/api/v1/placement/measure';
-const API_GENERATE_ENDPOINT = 'http://localhost:3000/api/v1/placement/generate';
+import { API_ENDPOINTS } from '../config/api';
+
+const API_MEASURE_ENDPOINT = API_ENDPOINTS.placement.measure;
+const API_GENERATE_ENDPOINT = API_ENDPOINTS.placement.generate;
 
 const PlacementInput = () => {
     const navigate = useNavigate();
@@ -312,10 +314,21 @@ const PlacementInput = () => {
 
             console.log('Step 2-4: Sending full generation request...', inputData);
 
+            // 添加超时控制 (2分钟)
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 120000);
+
             const response = await fetch(API_GENERATE_ENDPOINT, {
                 method: 'POST',
-                body: newFormData
+                body: newFormData,
+                signal: controller.signal
             });
+
+            clearTimeout(timeoutId);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
 
             const result = await response.json();
             console.log('Full response received:', result);
@@ -332,7 +345,11 @@ const PlacementInput = () => {
             }
         } catch (error) {
             console.error('Generation error:', error);
-            alert(t('alerts.networkError'));
+            if (error.name === 'AbortError') {
+                alert(t('alerts.timeout') || '请求超时，请重试');
+            } else {
+                alert(t('alerts.networkError') + ': ' + error.message);
+            }
         } finally {
             setIsLoading(false);
         }

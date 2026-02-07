@@ -8,7 +8,7 @@
 
 ## 🌟 Project Overview
 
-**InstaRoom** is a revolutionary AI home design application that empowers everyone to become their own interior designer. Simply upload a room photo, and AI will help you:
+**InstaRoom** is a interesting AI home design application that empowers everyone to become their own interior designer. Simply upload a room photo, and AI will help you:
 
 - 🎯 **Smart Scoring** - Evaluate your living space from multiple professional dimensions
 - 🛋️ **Furniture Swap** - Replace old furniture with one click and preview the new look

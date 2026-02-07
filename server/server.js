@@ -9,18 +9,6 @@ const cors = require('@koa/cors'); // 导入 CORS
 const path = require('path');
 require('dotenv').config(); // 确保加载环境变量
 
-// === 代理配置说明 ===
-// 如果使用 Clash TUN 模式（虚拟网卡），无需配置代理，流量会自动通过虚拟网卡
-// 如果使用 HTTP 代理模式，取消下面的注释并配置正确的代理地址
-/*
-const { setGlobalDispatcher, ProxyAgent } = require('undici');
-const PROXY_URL = process.env.PROXY_URL || 'http://127.0.0.1:7897'; 
-const proxyAgent = new ProxyAgent(PROXY_URL);
-setGlobalDispatcher(proxyAgent);
-console.log(`Using HTTP proxy: ${PROXY_URL}`);
-*/
-// ==========================================
-
 const app = new Koa();
 const port = process.env.PORT || 3000;
 app.use(cors({
@@ -32,8 +20,12 @@ app.use(cors({
 // 1. 配置文件上传中间件
 app.use(koaBody({
     multipart: true, // 启用多部分表单解析
+    json: true,
+    jsonLimit: '50mb',  // 增加 JSON 响应限制（用于 base64 图片）
+    textLimit: '50mb',
+    formLimit: '50mb',
     formidable: {
-        maxFileSize: 5 * 1024 * 1024, // 限制文件大小为 10MB
+        maxFileSize: 10 * 1024 * 1024, // 限制文件大小为 10MB
         uploadDir: './temp_uploads', // 临时文件存放目录
         keepExtensions: true, // 保留文件扩展名
         onFileBegin: (name, file) => {
@@ -45,6 +37,14 @@ app.use(koaBody({
         }
     }
 }));
+
+// 添加请求超时中间件（2分钟超时，用于AI生成）
+app.use(async (ctx, next) => {
+    // 设置响应超时为 2 分钟
+    ctx.req.setTimeout(120000);
+    ctx.res.setTimeout(120000);
+    await next();
+});
 
 // === 静态文件服务配置===
 app.use(serve(path.join(__dirname, 'public')));
@@ -61,6 +61,7 @@ app.on('error', (err, ctx) => {
 });
 
 
-app.listen(port, () => {
-    console.log(`InstaRoom Backend running on http://localhost:${port}`);
+app.listen(port, '0.0.0.0', () => {
+    console.log(`InstaRoom Backend running on http://0.0.0.0:${port}`);
+    console.log(`Access from other devices: http://<your-ip>:${port}`);
 });

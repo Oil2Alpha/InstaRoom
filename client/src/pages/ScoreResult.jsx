@@ -5,6 +5,7 @@ import Logo from '../components/Logo';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import LoadingOverlay from '../components/LoadingOverlay';
+import { API_ENDPOINTS } from '../config/api';
 
 const ScoreResult = () => {
     const [data, setData] = useState(null);
@@ -117,7 +118,7 @@ const ScoreResult = () => {
 
             console.log('Sending dream home generation request...');
 
-            const response = await fetch('http://localhost:3000/api/v1/dream-home/generate', {
+            const response = await fetch(API_ENDPOINTS.dreamHome, {
                 method: 'POST',
                 body: formData
             });

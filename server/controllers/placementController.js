@@ -103,8 +103,7 @@ async function generatePlacement(ctx) {
         console.log('=== 家具置换流程完成 ===');
 
         // 7. 返回结果
-        ctx.status = 200;
-        ctx.body = {
+        const responseData = {
             success: true,
             data: {
                 dimensions: calculatedDimensions,
@@ -112,6 +111,13 @@ async function generatePlacement(ctx) {
                 options: placementOptions.options
             }
         };
+
+        // 打印响应大小（用于调试）
+        const responseSize = JSON.stringify(responseData).length;
+        console.log(`响应数据大小: ${(responseSize / 1024).toFixed(2)} KB`);
+
+        ctx.status = 200;
+        ctx.body = responseData;
 
     } catch (error) {
         console.error('家具置换流程失败:', error);

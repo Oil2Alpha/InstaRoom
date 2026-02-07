@@ -8,7 +8,9 @@ import Button from '../components/Button';
 import LoadingOverlay from '../components/LoadingOverlay';
 
 // 模拟后端 API 地址
-const API_ENDPOINT = 'http://localhost:3000/api/v1/score';
+import { API_ENDPOINTS } from '../config/api';
+
+const API_ENDPOINT = API_ENDPOINTS.score;
 
 const ScoreInput = () => {
     const navigate = useNavigate();

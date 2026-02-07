@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Logo from '../components/Logo';
 import LoadingOverlay from '../components/LoadingOverlay';
+import { API_ENDPOINTS } from '../config/api';
 
 const RoomCustomizationInput = () => {
     const navigate = useNavigate();
@@ -93,7 +94,7 @@ const RoomCustomizationInput = () => {
 
             console.log('发送房间定制请求...');
 
-            const response = await fetch('http://localhost:3000/api/v1/room-customization/generate', {
+            const response = await fetch(API_ENDPOINTS.roomCustomization, {
                 method: 'POST',
                 body: formData
             });
