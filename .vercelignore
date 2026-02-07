@@ -1,0 +1,6 @@
+# Ignore server directory (we only need client for static build)
+server/
+test/
+*.md
+.git/
+.gitignore
