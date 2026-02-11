@@ -99,12 +99,12 @@ Input your design requirements (e.g., "I want a pink bedroom suitable for female
 
 This project deeply integrates multiple Google Gemini API capabilities:
 
-1. **Multimodal Image Analysis** (`gemini-2.5-flash`)
+1. **Multimodal Image Analysis** (`gemini-3-flash`)
    - Room photo analysis
    - Furniture recognition and dimension estimation
    - Style identification
 
-2. **Image Editing & Generation** (`gemini-2.5-flash-image`)
+2. **Image Editing & Generation** (`gemini-3-flash-image`)
    - Furniture swap renderings
    - Dream home visualizations
    - Style customization effects
@@ -128,7 +128,7 @@ This project deeply integrates multiple Google Gemini API capabilities:
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/your-username/instaroom.git
+git clone [https://github.com/Oil2Alpha/InstaRoom.git](https://github.com/Oil2Alpha/InstaRoom.git)
 cd instaroom
 ```
 
@@ -137,10 +137,14 @@ cd instaroom
 # Install backend dependencies
 cd server
 npm install
+echo "GEMINI_API_KEY=your_api_key"
+> .env
+node server.js
 
-# Install frontend dependencies
-cd ../client
+# Install frontend dependencies(In a new terminal)
+cd client
 npm install
+npm run dev
 ```
 
 3. **Configure environment variables**
