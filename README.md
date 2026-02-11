@@ -132,7 +132,7 @@ git clone https://github.com/Oil2Alpha/InstaRoom.git
 cd InstaRoom
 ```
 
-2. **Install dependencies and run service**
+2. **Install backend dependencies and run service**
 ```bash
 # Install backend dependencies(Terminal 1)
 cd server
@@ -143,13 +143,14 @@ echo "GEMINI_API_KEY=your_api_key"
 # Start backend service
 node server.js
 
+3. **Install Frontend dependencies and run**
 # Install frontend dependencies(Terminal 2)
 cd client
 npm install
 npm run dev
 ```
 
-3. **Access the application**
+4. **Access the application**
 Open your browser and visit `http://localhost:5173`
 
 ## 📂 Project Structure
