@@ -128,14 +128,13 @@ This project deeply integrates multiple Google Gemini API capabilities:
 
 1. **Clone the repository**
 ```bash
-git clone [https://github.com/Oil2Alpha/InstaRoom.git](https://github.com/Oil2Alpha/InstaRoom.git)
-cd instaroom
+git clone https://github.com/Oil2Alpha/InstaRoom.git
 ```
 
 2. **Install dependencies**
 ```bash
 # Install backend dependencies
-cd server
+cd instaroom/server
 npm install
 echo "GEMINI_API_KEY=your_api_key"
 > .env
@@ -147,14 +146,7 @@ npm install
 npm run dev
 ```
 
-3. **Configure environment variables**
-```bash
-# Create .env file in server directory
-cd ../server
-echo "GEMINI_API_KEY=your_api_key_here" > .env
-```
-
-4. **Start the services**
+3. **Start the services**
 ```bash
 # Start backend (port 3000)
 cd server
@@ -165,7 +157,7 @@ cd client
 npm run dev
 ```
 
-5. **Access the application**
+4. **Access the application**
 Open your browser and visit `http://localhost:5173`
 
 ## 📂 Project Structure
