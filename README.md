@@ -145,8 +145,8 @@ node server.js
 ```
 
 3. **Install Frontend dependencies and run**
-# Install frontend dependencies(Terminal 2)
 ```bash
+# Install frontend dependencies(Terminal 2)
 cd client
 npm install
 npm run dev
