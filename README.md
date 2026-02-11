@@ -142,9 +142,11 @@ echo "GEMINI_API_KEY=your_api_key"
 > .env
 # Start backend service
 node server.js
+```
 
 3. **Install Frontend dependencies and run**
 # Install frontend dependencies(Terminal 2)
+```bash
 cd client
 npm install
 npm run dev
