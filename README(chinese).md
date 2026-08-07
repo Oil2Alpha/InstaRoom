@@ -2,7 +2,7 @@
 
 > **Google Gemini API Hackathon 2026 参赛作品**
 >
-> 基于 Gemini 2.5 Flash 多模态能力的一站式智能家居设计平台
+> 基于 Gemini 3 Flash 多模态能力的一站式智能家居设计平台
 
 
 ## 🌟 项目简介
@@ -20,7 +20,7 @@
 上传房间照片，AI 从**空间布局**、**色彩搭配**、**光线利用**、**风格协调**、**功能性**五大维度进行专业评估，并生成独特的"空间叙事"，用诗意的语言描述你的居住空间。
 
 **技术亮点：**
-- Gemini 2.5 Flash 多模态图像分析
+- Gemini 3 Flash 多模态图像分析
 - 结构化 JSON 输出确保评分一致性
 - 支持中英文双语评分报告
 
@@ -34,7 +34,7 @@
 
 **技术亮点：**
 - 双视角尺寸测量算法
-- Gemini 2.5 Flash Image 实现图像编辑
+- Gemini 3 Flash Image 实现图像编辑
 - 基于向量相似度的商品匹配
 - **语义标签智能翻译**：将抽象需求（如"儿童友好"、"易于清洁"）自动转换为精确的材质和结构标签（如"圆角设计"、"防水面料"、"可拆洗"），实现从用户意图到电商可搜索标签的智能映射
 
@@ -78,8 +78,8 @@
 │  └── 多语言 Prompt 支持                                       │
 ├─────────────────────────────────────────────────────────────┤
 │  AI Engine (Google Gemini API)                               │
-│  ├── Gemini 2.5 Flash - 文本生成 & 图像分析                   │
-│  ├── Gemini 2.5 Flash Image - 图像编辑 & 生成                 │
+│  ├── Gemini 3 Flash - 文本生成 & 图像分析                   │
+│  ├── Gemini 3 Flash Image - 图像编辑 & 生成                 │
 │  └── 结构化 JSON 输出                                         │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -90,7 +90,7 @@
 |------|------|
 | **前端** | React 18, Vite, TailwindCSS, react-i18next, React Router |
 | **后端** | Node.js, Koa, @google/genai SDK |
-| **AI** | Gemini 2.5 Flash, Gemini 2.5 Flash Image |
+| **AI** | Gemini 3 Flash, Gemini 3 Flash Image |
 | **数据库** | SQLite (本地商品数据) |
 | **工具** | ESLint, Prettier |
 
@@ -98,12 +98,12 @@
 
 本项目深度使用 Google Gemini API 的多项能力：
 
-1. **多模态图像分析** (`gemini-2.5-flash`)
+1. **多模态图像分析** (`gemini-3-flash`)
    - 房间照片分析
    - 家具识别与尺寸估算
    - 风格识别
 
-2. **图像编辑与生成** (`gemini-2.5-flash-image`)
+2. **图像编辑与生成** (`gemini-3-flash-image`)
    - 家具置换效果图
    - 梦想家园渲染
    - 风格定制效果图
