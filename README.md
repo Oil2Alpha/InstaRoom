@@ -1,8 +1,10 @@
-# 🏠 InstaRoom - AI-Powered Home Design Assistant
-
-> **Google Gemini API Hackathon 2026 Submission**
+> **Gemini 3 Hackathon Submission**
 >
-> A one-stop intelligent home design platform powered by Gemini 2.5 Flash multimodal capabilities
+> A one-stop intelligent home design platform powered by Gemini 3 multimodal capabilities
+>
+> [View the project on Devpost](https://devpost.com/software/instaroom)
+>
+> A one-stop intelligent home design platform powered by Gemini 3 Flash multimodal capabilities
 
 ![InstaRoom Banner](./client/public/banner.png)
 
@@ -21,7 +23,7 @@
 Upload a room photo, and AI evaluates it from **five professional dimensions**: Space Layout, Color Harmony, Lighting Utilization, Style Coordination, and Functionality. It also generates a unique "Space Narrative" - a poetic description of your living space.
 
 **Technical Highlights:**
-- Gemini 2.5 Flash multimodal image analysis
+- Gemini 3 Flash multimodal image analysis
 - Structured JSON output ensures scoring consistency
 - Bilingual scoring reports (English/Chinese)
 
@@ -35,7 +37,7 @@ Select the furniture to replace, and AI will:
 
 **Technical Highlights:**
 - Dual-perspective dimension measurement algorithm
-- Gemini 2.5 Flash Image for image editing
+- Gemini 3 Flash Image for image editing
 - Vector similarity-based product matching
 - **Semantic Tag Smart Translation**: Automatically converts abstract requirements (e.g., "child-friendly", "easy to clean") into precise material and structural tags (e.g., "rounded corners", "waterproof fabric", "removable and washable"), enabling intelligent mapping from user intent to e-commerce searchable tags
 
@@ -79,8 +81,8 @@ Input your design requirements (e.g., "I want a pink bedroom suitable for female
 │  └── Multi-language Prompt Support                           │
 ├─────────────────────────────────────────────────────────────┤
 │  AI Engine (Google Gemini API)                               │
-│  ├── Gemini 2.5 Flash - Text Generation & Image Analysis     │
-│  ├── Gemini 2.5 Flash Image - Image Editing & Generation     │
+│  ├── Gemini 3 Flash - Text Generation & Image Analysis     │
+│  ├── Gemini 3 Flash Image - Image Editing & Generation     │
 │  └── Structured JSON Output                                  │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -91,7 +93,7 @@ Input your design requirements (e.g., "I want a pink bedroom suitable for female
 |-------|------------|
 | **Frontend** | React 18, Vite, TailwindCSS, react-i18next, React Router |
 | **Backend** | Node.js, Koa, @google/genai SDK |
-| **AI** | Gemini 2.5 Flash, Gemini 2.5 Flash Image |
+| **AI** | Gemini 3 Flash, Gemini 3 Flash Image |
 | **Database** | SQLite (local product data) |
 | **Tools** | ESLint, Prettier |
 
@@ -200,9 +202,6 @@ This project uses the following third-party services and libraries:
 | TailwindCSS | CSS framework | MIT |
 | react-i18next | Internationalization | MIT |
 
-## 🎬 Demo Video
-
-[Watch Demo Video](https://your-demo-video-link.com)
 
 ## 🧪 Testing Instructions
 
@@ -220,8 +219,8 @@ This project uses the following third-party services and libraries:
 
 | Role | Member |
 |------|--------|
-| Project Lead | [Your Name] |
-| Developer | [Team Members] |
+| Project Lead | [Jiayu_shao] |
+| Developer | [Qikang_zhu] |
 
 ## 📝 License
 
