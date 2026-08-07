@@ -4,9 +4,6 @@
 >
 > [View the project on Devpost](https://devpost.com/software/instaroom)
 >
-> A one-stop intelligent home design platform powered by Gemini 3 Flash multimodal capabilities
-
-![InstaRoom Banner](./client/public/banner.png)
 
 ## 🌟 Project Overview
 
